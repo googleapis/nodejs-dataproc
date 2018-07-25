@@ -18,11 +18,16 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICGenerator()gcp.CommonTemplates()
+
 
 version = 'v1'
 library = gapic.node_library('dataproc', version)
 s.copy(library, excludes=['README.md', 'package.json'])
+
+templates = common_templates.node_library(package_name="@google-cloud/dataproc")
+s.copy(templates)
+
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'ci'])
