@@ -18,7 +18,8 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 
-gapic = gcp.GAPICGenerator()common_templates = gcp.CommonTemplates()
+gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
 
 
 version = 'v1'
