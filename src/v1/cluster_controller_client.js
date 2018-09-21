@@ -206,7 +206,7 @@ class ClusterControllerClient {
       'listClusters',
       'diagnoseCluster',
     ];
-    for (const methodName of clusterControllerStubMethods) {
+    for (let methodName of clusterControllerStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         clusterControllerStub.then(
           stub =>
