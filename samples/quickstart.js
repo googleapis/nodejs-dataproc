@@ -48,7 +48,7 @@ async function main() {
 
   // Or obtain the paged response.
   const options = {autoPaginate: false};
-  const callback = responses => {
+  const callback = async responses => {
     // The actual resources in a response.
     const resources = responses[0];
     // The next request if the response shows that there are more responses.
@@ -60,11 +60,12 @@ async function main() {
     }
     if (nextRequest) {
       // Fetch the next page.
-      return client.listClusters(nextRequest, options).then(callback);
+      const response = await client.listClusters(nextRequest, options);
+      return callback(response);
     }
   };
-  client.listClusters(request, options).then(callback);
-
+  const response = await client.listClusters(request, options);
+  callback(response);
   client.listClustersStream(request).on('data', element => {
     console.log(element);
   });
