@@ -46,26 +46,22 @@ async function main() {
     console.log(resources[i]);
   }
 
+  let nextRequest = request;
   // Or obtain the paged response.
   const options = {autoPaginate: false};
-  const callback = async responses => {
+  do {
+    const responses = await client.listClusters(nextRequest, options);
     // The actual resources in a response.
     const resources = responses[0];
     // The next request if the response shows that there are more responses.
-    const nextRequest = responses[1];
+    nextRequest = responses[1];
     // The actual response object, if necessary.
     // const rawResponse = responses[2];
     for (let i = 0; i < resources.length; i += 1) {
       console.log(resources[i]);
     }
-    if (nextRequest) {
-      // Fetch the next page.
-      const response = await client.listClusters(nextRequest, options);
-      return callback(response);
-    }
-  };
-  const response = await client.listClusters(request, options);
-  callback(response);
+  } while (nextRequest);
+
   client.listClustersStream(request).on('data', element => {
     console.log(element);
   });
