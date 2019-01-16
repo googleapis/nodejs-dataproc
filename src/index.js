@@ -24,15 +24,6 @@
 /**
  * @namespace google.cloud.dataproc.v1
  */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.longrunning
- */
-/**
- * @namespace google.rpc
- */
 
 'use strict';
 
