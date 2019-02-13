@@ -212,6 +212,10 @@ class WorkflowTemplateServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
