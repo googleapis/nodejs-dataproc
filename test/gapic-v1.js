@@ -23,6 +23,22 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ClusterControllerClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dataprocModule.v1.ClusterControllerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dataprocModule.v1.ClusterControllerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1.ClusterControllerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createCluster', function() {
     it('invokes createCluster without error', done => {
       const client = new dataprocModule.v1.ClusterControllerClient({
@@ -573,6 +589,22 @@ describe('ClusterControllerClient', () => {
   });
 });
 describe('JobControllerClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dataprocModule.v1.JobControllerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dataprocModule.v1.JobControllerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1.JobControllerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('submitJob', () => {
     it('invokes submitJob without error', done => {
       const client = new dataprocModule.v1.JobControllerClient({
@@ -990,6 +1022,24 @@ describe('JobControllerClient', () => {
   });
 });
 describe('WorkflowTemplateServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      dataprocModule.v1.WorkflowTemplateServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      dataprocModule.v1.WorkflowTemplateServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1.WorkflowTemplateServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createWorkflowTemplate', () => {
     it('invokes createWorkflowTemplate without error', done => {
       const client = new dataprocModule.v1.WorkflowTemplateServiceClient({

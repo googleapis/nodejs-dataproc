@@ -23,6 +23,24 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AutoscalingPolicyServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      dataprocModule.v1beta2.AutoscalingPolicyServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      dataprocModule.v1beta2.AutoscalingPolicyServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1beta2.AutoscalingPolicyServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createAutoscalingPolicy', () => {
     it('invokes createAutoscalingPolicy without error', done => {
       const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
@@ -348,6 +366,24 @@ describe('AutoscalingPolicyServiceClient', () => {
   });
 });
 describe('ClusterControllerClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      dataprocModule.v1beta2.ClusterControllerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      dataprocModule.v1beta2.ClusterControllerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1beta2.ClusterControllerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createCluster', function() {
     it('invokes createCluster without error', done => {
       const client = new dataprocModule.v1beta2.ClusterControllerClient({
@@ -898,6 +934,22 @@ describe('ClusterControllerClient', () => {
   });
 });
 describe('JobControllerClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dataprocModule.v1beta2.JobControllerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dataprocModule.v1beta2.JobControllerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1beta2.JobControllerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('submitJob', () => {
     it('invokes submitJob without error', done => {
       const client = new dataprocModule.v1beta2.JobControllerClient({
@@ -1323,6 +1375,24 @@ describe('JobControllerClient', () => {
   });
 });
 describe('WorkflowTemplateServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      dataprocModule.v1beta2.WorkflowTemplateServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      dataprocModule.v1beta2.WorkflowTemplateServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dataprocModule.v1beta2.WorkflowTemplateServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createWorkflowTemplate', () => {
     it('invokes createWorkflowTemplate without error', done => {
       const client = new dataprocModule.v1beta2.WorkflowTemplateServiceClient({
