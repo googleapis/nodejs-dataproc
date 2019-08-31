@@ -14,6 +14,202 @@
                     "java_package": "com.google.cloud.dataproc.v1beta2"
                   },
                   "nested": {
+                    "AutoscalingPolicyService": {
+                      "methods": {
+                        "CreateAutoscalingPolicy": {
+                          "requestType": "CreateAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.post": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies",
+                            "(google.api.http).additional_bindings.body": "policy"
+                          }
+                        },
+                        "UpdateAutoscalingPolicy": {
+                          "requestType": "UpdateAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).put": "/v1beta2/{policy.name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.put": "/v1beta2/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.body": "policy"
+                          }
+                        },
+                        "GetAutoscalingPolicy": {
+                          "requestType": "GetAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                          }
+                        },
+                        "ListAutoscalingPolicies": {
+                          "requestType": "ListAutoscalingPoliciesRequest",
+                          "responseType": "ListAutoscalingPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
+                            "(google.api.http).additional_bindings.get": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies"
+                          }
+                        },
+                        "DeleteAutoscalingPolicy": {
+                          "requestType": "DeleteAutoscalingPolicyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                          }
+                        }
+                      }
+                    },
+                    "AutoscalingPolicy": {
+                      "oneofs": {
+                        "algorithm": {
+                          "oneof": [
+                            "basicAlgorithm"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "basicAlgorithm": {
+                          "type": "BasicAutoscalingAlgorithm",
+                          "id": 3
+                        },
+                        "workerConfig": {
+                          "type": "InstanceGroupAutoscalingPolicyConfig",
+                          "id": 4
+                        },
+                        "secondaryWorkerConfig": {
+                          "type": "InstanceGroupAutoscalingPolicyConfig",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "BasicAutoscalingAlgorithm": {
+                      "fields": {
+                        "yarnConfig": {
+                          "type": "BasicYarnAutoscalingConfig",
+                          "id": 1
+                        },
+                        "cooldownPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BasicYarnAutoscalingConfig": {
+                      "fields": {
+                        "gracefulDecommissionTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "scaleUpFactor": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "scaleDownFactor": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "scaleUpMinWorkerFraction": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "scaleDownMinWorkerFraction": {
+                          "type": "double",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "InstanceGroupAutoscalingPolicyConfig": {
+                      "fields": {
+                        "minInstances": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "maxInstances": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "weight": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateAutoscalingPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "policy": {
+                          "type": "AutoscalingPolicy",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetAutoscalingPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateAutoscalingPolicyRequest": {
+                      "fields": {
+                        "policy": {
+                          "type": "AutoscalingPolicy",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeleteAutoscalingPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListAutoscalingPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAutoscalingPoliciesResponse": {
+                      "fields": {
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "AutoscalingPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ClusterController": {
                       "methods": {
                         "CreateCluster": {
@@ -1464,202 +1660,6 @@
                           "id": 3
                         },
                         "jobId": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "AutoscalingPolicyService": {
-                      "methods": {
-                        "CreateAutoscalingPolicy": {
-                          "requestType": "CreateAutoscalingPolicyRequest",
-                          "responseType": "AutoscalingPolicy",
-                          "options": {
-                            "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
-                            "(google.api.http).body": "policy",
-                            "(google.api.http).additional_bindings.post": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies",
-                            "(google.api.http).additional_bindings.body": "policy"
-                          }
-                        },
-                        "UpdateAutoscalingPolicy": {
-                          "requestType": "UpdateAutoscalingPolicyRequest",
-                          "responseType": "AutoscalingPolicy",
-                          "options": {
-                            "(google.api.http).put": "/v1beta2/{policy.name=projects/*/locations/*/autoscalingPolicies/*}",
-                            "(google.api.http).body": "policy",
-                            "(google.api.http).additional_bindings.put": "/v1beta2/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
-                            "(google.api.http).additional_bindings.body": "policy"
-                          }
-                        },
-                        "GetAutoscalingPolicy": {
-                          "requestType": "GetAutoscalingPolicyRequest",
-                          "responseType": "AutoscalingPolicy",
-                          "options": {
-                            "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
-                            "(google.api.http).additional_bindings.get": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
-                          }
-                        },
-                        "ListAutoscalingPolicies": {
-                          "requestType": "ListAutoscalingPoliciesRequest",
-                          "responseType": "ListAutoscalingPoliciesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
-                            "(google.api.http).additional_bindings.get": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies"
-                          }
-                        },
-                        "DeleteAutoscalingPolicy": {
-                          "requestType": "DeleteAutoscalingPolicyRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
-                            "(google.api.http).additional_bindings.delete": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
-                          }
-                        }
-                      }
-                    },
-                    "AutoscalingPolicy": {
-                      "oneofs": {
-                        "algorithm": {
-                          "oneof": [
-                            "basicAlgorithm"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "id": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "basicAlgorithm": {
-                          "type": "BasicAutoscalingAlgorithm",
-                          "id": 3
-                        },
-                        "workerConfig": {
-                          "type": "InstanceGroupAutoscalingPolicyConfig",
-                          "id": 4
-                        },
-                        "secondaryWorkerConfig": {
-                          "type": "InstanceGroupAutoscalingPolicyConfig",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "BasicAutoscalingAlgorithm": {
-                      "fields": {
-                        "yarnConfig": {
-                          "type": "BasicYarnAutoscalingConfig",
-                          "id": 1
-                        },
-                        "cooldownPeriod": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BasicYarnAutoscalingConfig": {
-                      "fields": {
-                        "gracefulDecommissionTimeout": {
-                          "type": "google.protobuf.Duration",
-                          "id": 5
-                        },
-                        "scaleUpFactor": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "scaleDownFactor": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "scaleUpMinWorkerFraction": {
-                          "type": "double",
-                          "id": 3
-                        },
-                        "scaleDownMinWorkerFraction": {
-                          "type": "double",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "InstanceGroupAutoscalingPolicyConfig": {
-                      "fields": {
-                        "minInstances": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "maxInstances": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "weight": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CreateAutoscalingPolicyRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "policy": {
-                          "type": "AutoscalingPolicy",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetAutoscalingPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateAutoscalingPolicyRequest": {
-                      "fields": {
-                        "policy": {
-                          "type": "AutoscalingPolicy",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "DeleteAutoscalingPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListAutoscalingPoliciesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListAutoscalingPoliciesResponse": {
-                      "fields": {
-                        "policies": {
-                          "rule": "repeated",
-                          "type": "AutoscalingPolicy",
-                          "id": 1
-                        },
-                        "nextPageToken": {
                           "type": "string",
                           "id": 2
                         }
