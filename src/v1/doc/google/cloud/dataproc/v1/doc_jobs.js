@@ -418,7 +418,7 @@ const JobPlacement = {
  *   The number should be among the values of [State]{@link google.cloud.dataproc.v1.State}
  *
  * @property {string} details
- *   Output only. Optional job state details, such as an error
+ *   Optional. Output only. Job state details, such as an error
  *   description if the state is <code>ERROR</code>.
  *
  * @property {Object} stateStartTime
