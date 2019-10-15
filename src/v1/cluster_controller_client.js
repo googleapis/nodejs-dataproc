@@ -287,7 +287,9 @@ class ClusterControllerClient {
   // -------------------
 
   /**
-   * Creates a cluster in a project.
+   * Creates a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -418,7 +420,9 @@ class ClusterControllerClient {
   }
 
   /**
-   * Updates a cluster in a project.
+   * Updates a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -478,6 +482,10 @@ class ClusterControllerClient {
    *    <tr>
    *    <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
    *    <td>Resize secondary worker group</td>
+   *    </tr>
+   *    <tr>
+   *    <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
+   *    change autoscaling policies</td>
    *    </tr>
    *    </tbody>
    *    </table>
@@ -624,7 +632,9 @@ class ClusterControllerClient {
   }
 
   /**
-   * Deletes a cluster in a project.
+   * Deletes a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1026,9 +1036,13 @@ class ClusterControllerClient {
   }
 
   /**
-   * Gets cluster diagnostic information.
-   * After the operation completes, the Operation.response field
-   * contains `DiagnoseClusterOutputLocation`.
+   * Gets cluster diagnostic information. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+   * After the operation completes,
+   * Operation.response
+   * contains
+   * [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
    *
    * @param {Object} request
    *   The request object that will be sent.
