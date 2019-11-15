@@ -21,7 +21,7 @@ const uuid = require('uuid');
 const region = 'us-central1';
 const clusterName = `test-${uuid()}`;
 
-const dataproc = require('@google-cloud/dataproc');
+const dataproc = require('@google-cloud/dataproc').v1;
 const client = new dataproc.v1.ClusterControllerClient({
   apiEndpoint: `${region}-dataproc.googleapis.com`,
 });

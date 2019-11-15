@@ -16,7 +16,7 @@
 
 function main(projectId, region, clusterName) {
   // [START dataproc_create_cluster]
-  const dataproc = require('@google-cloud/dataproc');
+  const dataproc = require('@google-cloud/dataproc').v1;
 
   // Create a client with the endpoint set to the desired cluster region
   const client = new dataproc.v1.ClusterControllerClient({
