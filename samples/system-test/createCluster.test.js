@@ -35,7 +35,7 @@ describe('create a dataproc cluster', () => {
     const stdout = execSync(
       `node createCluster.js "${projectId}" "${region}" "${clusterName}"`
     );
-    assert.match(stdout, /clusterUuid/);
+    assert.match(stdout, new RegExp(`${clusterName}`));
   });
 
   after(async () => {

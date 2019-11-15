@@ -29,7 +29,7 @@ function main(projectId, region, clusterName) {
     // region = 'YOUR_CLUSTER_REGION'
     // cluster_name = 'YOUR_CLUSTER_NAME'
 
-    // Create your cluster config
+    // Create the cluster config
     const request = {
       projectId: projectId,
       region: region,
@@ -48,12 +48,12 @@ function main(projectId, region, clusterName) {
       },
     };
 
-    // Create our cluster
+    // Create the cluster
     const [operation] = await client.createCluster(request);
     const [response] = await operation.promise();
 
-    // Output the response
-    console.log(response);
+    // Output a success message
+    console.log(`Cluster created successfully: ${response.clusterName}`);
     // [END create_cluster]
   }
 
