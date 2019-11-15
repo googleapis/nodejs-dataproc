@@ -15,7 +15,7 @@
 // Code for creating a Cloud Dataproc cluster with the Node.js Client Library
 
 function main(projectId, region, clusterName) {
-  // [START create_cluster]
+  // [START dataproc_create_cluster]
   const dataproc = require('@google-cloud/dataproc');
 
   // Create a client with the endpoint set to the desired cluster region
@@ -54,7 +54,7 @@ function main(projectId, region, clusterName) {
 
     // Output a success message
     console.log(`Cluster created successfully: ${response.clusterName}`);
-    // [END create_cluster]
+    // [END dataproc_create_cluster]
   }
 
   createCluster();
