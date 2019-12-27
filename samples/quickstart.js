@@ -33,9 +33,10 @@ function main(projectId, region, clusterName, jobFilePath) {
 
   async function quickstart() {
     // TODO(developer): Uncomment and set the following variables
-    // project_id = 'YOUR_PROJECT_ID'
+    // projectId = 'YOUR_PROJECT_ID'
     // region = 'YOUR_CLUSTER_REGION'
-    // cluster_name = 'YOUR_CLUSTER_NAME'
+    // clusterName = 'YOUR_CLUSTER_NAME'
+    // jobFilePath = 'YOUR_JOB_FILE_PATH'
 
     // Create the cluster config
     const cluster = {
