@@ -15,14 +15,15 @@
 'use strict';
 
 const {assert} = require('chai');
+const {describe, it, after} = require('mocha');
 const cp = require('child_process');
 const uuid = require('uuid');
 
 const region = 'us-central1';
-const clusterName = `test-${uuid()}`;
+const clusterName = `node-cc-test-${uuid()}`;
 
 const dataproc = require('@google-cloud/dataproc').v1;
-const client = new dataproc.v1.ClusterControllerClient({
+const clusterClient = new dataproc.ClusterControllerClient({
   apiEndpoint: `${region}-dataproc.googleapis.com`,
 });
 
@@ -39,7 +40,7 @@ describe('create a dataproc cluster', () => {
   });
 
   after(async () => {
-    await client.deleteCluster({
+    await clusterClient.deleteCluster({
       projectId: projectId,
       region: region,
       clusterName: clusterName,
