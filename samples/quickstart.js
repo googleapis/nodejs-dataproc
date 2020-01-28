@@ -19,8 +19,8 @@
 // using the Node.js client library.
 //
 // Usage:
-// node quickstart.py --project_id <PROJECT_ID> --region <REGION> \
-//   --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
+//     node quickstart.js --project_id <PROJECT_ID> --region <REGION> \
+//         --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
 
 'use strict';
 
