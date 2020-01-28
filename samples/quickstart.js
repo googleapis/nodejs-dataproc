@@ -12,10 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// [START dataproc_quickstart]
+// This quickstart sample walks a user through creating a Cloud Dataproc
+// cluster, submitting a PySpark job from Google Cloud Storage to the
+// cluster, reading the output of the job and deleting the cluster, all
+// using the Node.js client library.
+//
+// Usage:
+// node quickstart.py --project_id <PROJECT_ID> --region <REGION> \
+//   --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
+
 'use strict';
 
 function main(projectId, region, clusterName, jobFilePath) {
-  // [START dataproc_quickstart]
   const dataproc = require('@google-cloud/dataproc').v1;
   const {Storage} = require('@google-cloud/storage');
 
@@ -32,12 +41,6 @@ function main(projectId, region, clusterName, jobFilePath) {
   });
 
   async function quickstart() {
-    // TODO(developer): Uncomment and set the following variables
-    // projectId = 'YOUR_PROJECT_ID'
-    // region = 'YOUR_CLUSTER_REGION'
-    // clusterName = 'YOUR_CLUSTER_NAME'
-    // jobFilePath = 'YOUR_JOB_FILE_PATH'
-
     // Create the cluster config
     const cluster = {
       projectId: projectId,
@@ -142,7 +145,30 @@ function main(projectId, region, clusterName, jobFilePath) {
   }
 
   quickstart();
-  // [END dataproc_quickstart]
 }
 
-main(...process.argv.slice(2));
+const args = require('yargs').options({
+  project_id: {
+    demandOption: true,
+    describe: 'Project to use for creating resources.',
+    type: 'string',
+  },
+  region: {
+    demandOption: true,
+    describe: 'Region where the resources should live.',
+    type: 'string',
+  },
+  cluster_name: {
+    demandOption: true,
+    describe: 'Name to use for creating a cluster.',
+    type: 'string',
+  },
+  job_file_path: {
+    demandOption: true,
+    describe: 'Job in GCS to execute against the cluster.',
+    type: 'string',
+  },
+}).argv;
+
+main(args.project_id, args.region, args.cluster_name, args.job_file_path);
+// [END dataproc_quickstart]

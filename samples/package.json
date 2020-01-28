@@ -11,12 +11,13 @@
   "repository": "googleapis/nodejs-dataproc",
   "private": true,
   "scripts": {
-    "test": "mocha system-test --timeout 600000"
+    "test": "mocha --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/dataproc": "^1.4.6",
     "@google-cloud/storage": "^4.1.3",
-    "sleep": "^6.1.0"
+    "sleep": "^6.1.0",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
