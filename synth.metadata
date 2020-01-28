@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-28T12:17:46.860775Z",
+  "updateTime": "2020-01-28T21:47:06.148353Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
-        "internalRef": "291821782"
+        "sha": "e19209fac29731d0baf6d9ac23da1164f7bdca24",
+        "internalRef": "291999930"
       }
     },
     {
@@ -69,13 +69,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -156,9 +150,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -192,12 +183,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -211,12 +196,6 @@
     },
     {
       "path": "codecov.yaml"
-    },
-    {
-      "path": "linkinator.config.json"
-    },
-    {
-      "path": "package.json"
     },
     {
       "path": "protos/google/cloud/dataproc/v1/autoscaling_policies.proto"
@@ -267,37 +246,13 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
-    },
-    {
-      "path": "samples/createCluster.js"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/system-test/createCluster.test.js"
-    },
-    {
-      "path": "samples/system-test/quickstart.test.js"
-    },
-    {
-      "path": "smoke-test/.eslintrc.yml"
     },
     {
       "path": "smoke-test/cluster_controller_smoke_test.js"
     },
     {
       "path": "src/browser.js"
-    },
-    {
-      "path": "src/index.js"
     },
     {
       "path": "src/v1/cluster_controller_client.js"
@@ -435,22 +390,10 @@
       "path": "src/v1beta2/workflow_template_service_proto_list.json"
     },
     {
-      "path": "synth.py"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
-    },
-    {
-      "path": "system-test/dataproc.js"
-    },
-    {
       "path": "test/gapic-v1.js"
     },
     {
       "path": "test/gapic-v1beta2.js"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "webpack.config.js"

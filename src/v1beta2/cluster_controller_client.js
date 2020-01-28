@@ -1053,7 +1053,7 @@ class ClusterControllerClient {
    * After the operation completes,
    * Operation.response
    * contains
-   * [Empty](https://cloud.google.comgoogle.protobuf.Empty).
+   * an empty object.
    *
    * @param {Object} request
    *   The request object that will be sent.
