@@ -19,8 +19,7 @@
 // using the Node.js client library.
 //
 // Usage:
-//     node quickstart.js --project_id <PROJECT_ID> --region <REGION> \
-//         --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
+//     node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <GCS_JOB_FILE_PATH>
 
 'use strict';
 
@@ -147,28 +146,14 @@ function main(projectId, region, clusterName, jobFilePath) {
   quickstart();
 }
 
-const args = require('yargs').options({
-  project_id: {
-    demandOption: true,
-    describe: 'Project to use for creating resources.',
-    type: 'string',
-  },
-  region: {
-    demandOption: true,
-    describe: 'Region where the resources should live.',
-    type: 'string',
-  },
-  cluster_name: {
-    demandOption: true,
-    describe: 'Name to use for creating a cluster.',
-    type: 'string',
-  },
-  job_file_path: {
-    demandOption: true,
-    describe: 'Job in GCS to execute against the cluster.',
-    type: 'string',
-  },
-}).argv;
+const args = process.argv.slice(2);
 
-main(args.project_id, args.region, args.cluster_name, args.job_file_path);
+if (args.length !== 4) {
+  console.log(
+    'Insufficient number of parameters provided. Please make sure a ' +
+      'PROJECT_ID, REGION, CLUSTER_NAME and JOB_FILE_PATH are provided, in this order.'
+  );
+}
+
+main(...args);
 // [END dataproc_quickstart]
