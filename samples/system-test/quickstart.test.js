@@ -51,7 +51,7 @@ describe('execute the quickstart', () => {
 
   it('should execute the quickstart', async () => {
     const stdout = execSync(
-      `node quickstart.js --project_id "${projectId}" --region "${region}" --cluster_name "${clusterName}" --job_file_path "${jobFilePath}"`
+      `node quickstart.js "${projectId}" "${region}" "${clusterName}" "${jobFilePath}"`
     );
     assert.match(stdout, /Cluster created successfully/);
     assert.match(stdout, /Submitted job/);
