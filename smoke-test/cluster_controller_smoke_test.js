@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('ClusterControllerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
@@ -63,7 +65,7 @@ describe('ClusterControllerSmokeTest', () => {
     };
 
     const options = {
-      autoPaginate: false
+      autoPaginate: false,
     };
     const callback = responses => {
       // The actual resources in a response.
