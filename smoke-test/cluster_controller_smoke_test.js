@@ -14,8 +14,6 @@
 
 'use strict';
 
-const {describe, it} = require('mocha');
-
 describe('ClusterControllerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
@@ -23,7 +21,7 @@ describe('ClusterControllerSmokeTest', () => {
   const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
-    const dataproc = require('../src');
+    const dataproc = require('../build/src');
 
     const client = new dataproc.v1beta2.ClusterControllerClient({
       // optional auth parameters.
@@ -50,7 +48,7 @@ describe('ClusterControllerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using callbacks', done => {
-    const dataproc = require('../src');
+    const dataproc = require('../build/src');
 
     const client = new dataproc.v1beta2.ClusterControllerClient({
       // optional auth parameters.
@@ -64,7 +62,9 @@ describe('ClusterControllerSmokeTest', () => {
       region: region,
     };
 
-    const options = {autoPaginate: false};
+    const options = {
+      autoPaginate: false
+    };
     const callback = responses => {
       // The actual resources in a response.
       const resources = responses[0];
@@ -88,7 +88,7 @@ describe('ClusterControllerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using streaming', done => {
-    const dataproc = require('../src');
+    const dataproc = require('../build/src');
 
     const client = new dataproc.v1beta2.ClusterControllerClient({
       // optional auth parameters.
