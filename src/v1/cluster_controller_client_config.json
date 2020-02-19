@@ -5,7 +5,6 @@
         "non_idempotent": [],
         "idempotent": [
           "DEADLINE_EXCEEDED",
-          "INTERNAL",
           "UNAVAILABLE"
         ],
         "unavailable": [
