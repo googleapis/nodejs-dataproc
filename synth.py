@@ -38,10 +38,6 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-s.replace('src/*/*.ts',
-          '[Empty]{@link google.protobuf.Empty}',
-          'an empty object')
-
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
