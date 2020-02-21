@@ -317,8 +317,7 @@
                             "(google.api.http).patch": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}",
                             "(google.api.http).body": "cluster",
                             "(google.longrunning.operation_info).response_type": "Cluster",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata",
-                            "(google.api.method_signature)": "project_id,region,cluster_name,cluster,update_mask"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
                           }
                         },
                         "DeleteCluster": {
@@ -491,6 +490,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "lifecycleConfig": {
+                          "type": "LifecycleConfig",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -570,6 +576,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 5
+                        },
+                        "reservationAffinity": {
+                          "type": "ReservationAffinity",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -910,6 +923,46 @@
                         }
                       }
                     },
+                    "LifecycleConfig": {
+                      "oneofs": {
+                        "ttl": {
+                          "oneof": [
+                            "autoDeleteTime",
+                            "autoDeleteTtl"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "idleDeleteTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoDeleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoDeleteTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "idleStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ClusterMetrics": {
                       "fields": {
                         "hdfsMetrics": {
@@ -1167,107 +1220,38 @@
                         }
                       }
                     },
-                    "ClusterOperationStatus": {
+                    "ReservationAffinity": {
                       "fields": {
-                        "state": {
-                          "type": "State",
+                        "consumeReservationType": {
+                          "type": "Type",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "innerState": {
+                        "key": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "details": {
+                        "values": {
+                          "rule": "repeated",
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "stateStartTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
                       "nested": {
-                        "State": {
+                        "Type": {
                           "values": {
-                            "UNKNOWN": 0,
-                            "PENDING": 1,
-                            "RUNNING": 2,
-                            "DONE": 3
-                          }
-                        }
-                      }
-                    },
-                    "ClusterOperationMetadata": {
-                      "fields": {
-                        "clusterName": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "clusterUuid": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "status": {
-                          "type": "ClusterOperationStatus",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusHistory": {
-                          "rule": "repeated",
-                          "type": "ClusterOperationStatus",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "operationType": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "warnings": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "TYPE_UNSPECIFIED": 0,
+                            "NO_RESERVATION": 1,
+                            "ANY_RESERVATION": 2,
+                            "SPECIFIC_RESERVATION": 3
                           }
                         }
                       }
@@ -1735,6 +1719,113 @@
                         }
                       }
                     },
+                    "SparkRJob": {
+                      "fields": {
+                        "mainRFileUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "args": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "archiveUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loggingConfig": {
+                          "type": "LoggingConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PrestoJob": {
+                      "oneofs": {
+                        "queries": {
+                          "oneof": [
+                            "queryFileUri",
+                            "queryList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "queryFileUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "queryList": {
+                          "type": "QueryList",
+                          "id": 2
+                        },
+                        "continueOnFailure": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputFormat": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loggingConfig": {
+                          "type": "LoggingConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "JobPlacement": {
                       "fields": {
                         "clusterName": {
@@ -1883,7 +1974,9 @@
                             "pysparkJob",
                             "hiveJob",
                             "pigJob",
-                            "sparkSqlJob"
+                            "sparkRJob",
+                            "sparkSqlJob",
+                            "prestoJob"
                           ]
                         }
                       },
@@ -1904,27 +1997,59 @@
                         },
                         "hadoopJob": {
                           "type": "HadoopJob",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkJob": {
                           "type": "SparkJob",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pysparkJob": {
                           "type": "PySparkJob",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "hiveJob": {
                           "type": "HiveJob",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pigJob": {
                           "type": "PigJob",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkRJob": {
+                          "type": "SparkRJob",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkSqlJob": {
                           "type": "SparkSqlJob",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "prestoJob": {
+                          "type": "PrestoJob",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "status": {
                           "type": "JobStatus",
@@ -6888,18 +7013,6 @@
             "Empty": {
               "fields": {}
             },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -6918,6 +7031,18 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             }
