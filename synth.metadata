@@ -1,19 +1,19 @@
 {
-  "updateTime": "2020-02-20T00:30:46.723883Z",
+  "updateTime": "2020-02-21T00:04:01.961650Z",
   "sources": [
     {
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-dataproc.git",
-        "sha": "d35f5605fa5feffe7423641aaf869d165d81d89b"
+        "sha": "5ac9ab36f226783fe2292c5ee104f211190257d8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a9639a0a9854fd6e1be08bba1ac3897f4f16cb2f",
-        "internalRef": "295983266"
+        "sha": "3eaaaf8626ce5b0c0bc7eee05e143beffa373b01",
+        "internalRef": "296274723"
       }
     },
     {

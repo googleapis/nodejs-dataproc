@@ -44,7 +44,6 @@
     "prepare": "npm run compile"
   },
   "dependencies": {
-    "chai": "^4.2.0",
     "google-gax": "^1.14.1",
     "protobufjs": "^6.8.6"
   },
