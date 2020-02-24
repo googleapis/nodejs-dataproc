@@ -17,7 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, PaginationResponse} from 'google-gax';
+import {
+  APICallback,
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  PaginationResponse,
+} from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
@@ -70,10 +78,12 @@ export class JobControllerClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
     const staticMembers = this.constructor as typeof JobControllerClient;
-    const servicePath = opts && opts.servicePath ?
-      opts.servicePath :
-      ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
-        staticMembers.servicePath);
+    const servicePath =
+      opts && opts.servicePath
+        ? opts.servicePath
+        : opts && opts.apiEndpoint
+        ? opts.apiEndpoint
+        : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -83,7 +93,7 @@ export class JobControllerClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = (typeof window !== 'undefined');
+    const isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
       opts.fallback = true;
     }
@@ -98,13 +108,10 @@ export class JobControllerClient {
     const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -120,11 +127,15 @@ export class JobControllerClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      opts.fallback ?
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -149,14 +160,20 @@ export class JobControllerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listJobs:
-        new gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
+      listJobs: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'jobs'
+      ),
     };
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.JobController', gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataproc.v1.JobController',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -166,16 +183,25 @@ export class JobControllerClient {
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.JobController.
     this.jobControllerStub = gaxGrpc.createStub(
-      opts.fallback ?
-        (protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.JobController') :
-        // tslint:disable-next-line no-any
-        (protos as any).google.cloud.dataproc.v1.JobController,
-      opts) as Promise<{[method: string]: Function}>;
+      opts.fallback
+        ? (protos as protobuf.Root).lookupService(
+            'google.cloud.dataproc.v1.JobController'
+          )
+        : // tslint:disable-next-line no-any
+          (protos as any).google.cloud.dataproc.v1.JobController,
+      opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const jobControllerStubMethods =
-      ['submitJob', 'getJob', 'listJobs', 'updateJob', 'cancelJob', 'deleteJob'];
+    const jobControllerStubMethods = [
+      'submitJob',
+      'getJob',
+      'listJobs',
+      'updateJob',
+      'cancelJob',
+      'deleteJob',
+    ];
 
     for (const methodName of jobControllerStubMethods) {
       const innerCallPromise = this.jobControllerStub.then(
@@ -187,14 +213,15 @@ export class JobControllerClient {
         },
         (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const apiCall = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
-        this._descriptors.stream[methodName] ||
-        this._descriptors.longrunning[methodName]
+          this._descriptors.stream[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
 
       this._innerApiCalls[methodName] = (
@@ -234,9 +261,7 @@ export class JobControllerClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -246,8 +271,9 @@ export class JobControllerClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-    Promise<string> | void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -260,18 +286,23 @@ export class JobControllerClient {
   // -------------------
   submitJob(
     request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined, {} | undefined
-    ]>;
+      protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
   submitJob(
     request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined>): void;
+      {} | undefined
+    >
+  ): void;
   /**
    * Submits a job to a cluster.
    *
@@ -304,24 +335,31 @@ export class JobControllerClient {
    */
   submitJob(
     request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined, {} | undefined>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dataproc.v1.IJob,
+          protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
+          {} | undefined
+        >,
     callback?: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined>):
-    Promise<[
+      {} | undefined
+    >
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined, {} | undefined
-    ]> | void {
+      protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -329,18 +367,23 @@ export class JobControllerClient {
   }
   getJob(
     request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined, {} | undefined
-    ]>;
+      protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getJob(
     request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined>): void;
+      {} | undefined
+    >
+  ): void;
   /**
    * Gets the resource representation for a job in a project.
    *
@@ -361,24 +404,31 @@ export class JobControllerClient {
    */
   getJob(
     request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined, {} | undefined>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dataproc.v1.IJob,
+          protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined,
+          {} | undefined
+        >,
     callback?: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined>):
-    Promise<[
+      {} | undefined
+    >
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined, {} | undefined
-    ]> | void {
+      protosTypes.google.cloud.dataproc.v1.IGetJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -386,18 +436,23 @@ export class JobControllerClient {
   }
   updateJob(
     request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined, {} | undefined
-    ]>;
+      protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
   updateJob(
     request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined>): void;
+      {} | undefined
+    >
+  ): void;
   /**
    * Updates a job in a project.
    *
@@ -427,24 +482,31 @@ export class JobControllerClient {
    */
   updateJob(
     request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined, {} | undefined>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dataproc.v1.IJob,
+          protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
+          {} | undefined
+        >,
     callback?: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined>):
-    Promise<[
+      {} | undefined
+    >
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined, {} | undefined
-    ]> | void {
+      protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -452,18 +514,23 @@ export class JobControllerClient {
   }
   cancelJob(
     request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined, {} | undefined
-    ]>;
+      protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
   cancelJob(
     request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined>): void;
+      {} | undefined
+    >
+  ): void;
   /**
    * Starts a job cancellation request. To access the job resource
    * after cancellation, call
@@ -488,24 +555,31 @@ export class JobControllerClient {
    */
   cancelJob(
     request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined, {} | undefined>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dataproc.v1.IJob,
+          protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
+          {} | undefined
+        >,
     callback?: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob,
       protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined>):
-    Promise<[
+      {} | undefined
+    >
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob,
-      protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined, {} | undefined
-    ]> | void {
+      protosTypes.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -513,18 +587,23 @@ export class JobControllerClient {
   }
   deleteJob(
     request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined, {} | undefined
-    ]>;
+      protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
   deleteJob(
     request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.protobuf.IEmpty,
       protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined>): void;
+      {} | undefined
+    >
+  ): void;
   /**
    * Deletes the job from the project. If the job is active, the delete fails,
    * and the response returns `FAILED_PRECONDITION`.
@@ -546,24 +625,31 @@ export class JobControllerClient {
    */
   deleteJob(
     request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined, {} | undefined>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.protobuf.IEmpty,
+          protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
+          {} | undefined
+        >,
     callback?: Callback<
       protosTypes.google.protobuf.IEmpty,
       protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined>):
-    Promise<[
+      {} | undefined
+    >
+  ): Promise<
+    [
       protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined, {} | undefined
-    ]> | void {
+      protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -572,19 +658,23 @@ export class JobControllerClient {
 
   listJobs(
     request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
-    options?: gax.CallOptions):
-    Promise<[
+    options?: gax.CallOptions
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob[],
       protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
       protosTypes.google.cloud.dataproc.v1.IListJobsResponse
-    ]>;
+    ]
+  >;
   listJobs(
     request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
     options: gax.CallOptions,
     callback: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob[],
       protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.dataproc.v1.IListJobsResponse>): void;
+      protosTypes.google.cloud.dataproc.v1.IListJobsResponse
+    >
+  ): void;
   /**
    * Lists regions/{region}/jobs in a project.
    *
@@ -643,26 +733,31 @@ export class JobControllerClient {
    */
   listJobs(
     request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
-    optionsOrCallback?: gax.CallOptions | Callback<
-      protosTypes.google.cloud.dataproc.v1.IJob[],
-      protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.dataproc.v1.IListJobsResponse>,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dataproc.v1.IJob[],
+          protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
+          protosTypes.google.cloud.dataproc.v1.IListJobsResponse
+        >,
     callback?: Callback<
       protosTypes.google.cloud.dataproc.v1.IJob[],
       protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.dataproc.v1.IListJobsResponse>):
-    Promise<[
+      protosTypes.google.cloud.dataproc.v1.IListJobsResponse
+    >
+  ): Promise<
+    [
       protosTypes.google.cloud.dataproc.v1.IJob[],
       protosTypes.google.cloud.dataproc.v1.IListJobsRequest | null,
       protosTypes.google.cloud.dataproc.v1.IListJobsResponse
-    ]> | void {
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -724,8 +819,8 @@ export class JobControllerClient {
    */
   listJobsStream(
     request?: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
-    options?: gax.CallOptions):
-    Transform {
+    options?: gax.CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
@@ -747,12 +842,18 @@ export class JobControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectLocationAutoscalingPolicyPath(project: string, location: string, autoscalingPolicy: string) {
-    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render({
-      project: project,
-      location: location,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectLocationAutoscalingPolicyPath(
+    project: string,
+    location: string,
+    autoscalingPolicy: string
+  ) {
+    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render(
+      {
+        project,
+        location,
+        autoscaling_policy: autoscalingPolicy,
+      }
+    );
   }
 
   /**
@@ -762,8 +863,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).project;
+  matchProjectFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).project;
   }
 
   /**
@@ -773,8 +878,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).location;
+  matchLocationFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).location;
   }
 
   /**
@@ -784,8 +893,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).autoscaling_policy;
   }
 
   /**
@@ -796,12 +909,18 @@ export class JobControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectLocationWorkflowTemplatePath(project: string, location: string, workflowTemplate: string) {
-    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.render({
-      project: project,
-      location: location,
-      workflow_template: workflowTemplate,
-    });
+  projectLocationWorkflowTemplatePath(
+    project: string,
+    location: string,
+    workflowTemplate: string
+  ) {
+    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.render(
+      {
+        project,
+        location,
+        workflow_template: workflowTemplate,
+      }
+    );
   }
 
   /**
@@ -811,8 +930,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).project;
+  matchProjectFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).project;
   }
 
   /**
@@ -822,8 +945,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).location;
+  matchLocationFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).location;
   }
 
   /**
@@ -833,8 +960,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).workflow_template;
   }
 
   /**
@@ -845,12 +976,18 @@ export class JobControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectRegionAutoscalingPolicyPath(project: string, region: string, autoscalingPolicy: string) {
-    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render({
-      project: project,
-      region: region,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectRegionAutoscalingPolicyPath(
+    project: string,
+    region: string,
+    autoscalingPolicy: string
+  ) {
+    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render(
+      {
+        project,
+        region,
+        autoscaling_policy: autoscalingPolicy,
+      }
+    );
   }
 
   /**
@@ -860,8 +997,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).project;
+  matchProjectFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).project;
   }
 
   /**
@@ -871,8 +1012,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).region;
+  matchRegionFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).region;
   }
 
   /**
@@ -882,8 +1027,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this._pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).autoscaling_policy;
   }
 
   /**
@@ -894,12 +1043,18 @@ export class JobControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectRegionWorkflowTemplatePath(project: string, region: string, workflowTemplate: string) {
-    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.render({
-      project: project,
-      region: region,
-      workflow_template: workflowTemplate,
-    });
+  projectRegionWorkflowTemplatePath(
+    project: string,
+    region: string,
+    workflowTemplate: string
+  ) {
+    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.render(
+      {
+        project,
+        region,
+        workflow_template: workflowTemplate,
+      }
+    );
   }
 
   /**
@@ -909,8 +1064,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).project;
+  matchProjectFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).project;
   }
 
   /**
@@ -920,8 +1079,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).region;
+  matchRegionFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).region;
   }
 
   /**
@@ -931,8 +1094,12 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this._pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).workflow_template;
   }
 
   /**
