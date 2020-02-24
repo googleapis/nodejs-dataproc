@@ -382,7 +382,7 @@ export class ClusterControllerClient {
 /**
  * Creates a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -453,7 +453,7 @@ export class ClusterControllerClient {
 /**
  * Updates a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -472,7 +472,8 @@ export class ClusterControllerClient {
  *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
  *   in progress to finish before forcefully removing nodes (and potentially
  *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
- *   the maximum allowed timeout is 1 day.
+ *   the maximum allowed timeout is 1 day. (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   Only supported on Dataproc image versions 1.2 and higher.
  * @param {google.protobuf.FieldMask} request.updateMask
@@ -587,7 +588,7 @@ export class ClusterControllerClient {
 /**
  * Deletes a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -661,11 +662,11 @@ export class ClusterControllerClient {
 /**
  * Gets cluster diagnostic information. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  * After the operation completes,
  * [Operation.response][google.longrunning.Operation.response]
  * contains
- * [DiagnoseClusterResults](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
+ * [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
  *
  * @param {Object} request
  *   The request object that will be sent.

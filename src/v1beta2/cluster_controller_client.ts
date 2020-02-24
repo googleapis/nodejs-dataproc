@@ -330,7 +330,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.clusterName
  *   Required. The cluster name.
  * @param {object} [options]
@@ -382,7 +382,7 @@ export class ClusterControllerClient {
 /**
  * Creates a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -390,7 +390,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
  *   Required. The cluster to create.
  * @param {string} [request.requestId]
@@ -453,7 +453,7 @@ export class ClusterControllerClient {
 /**
  * Updates a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -461,7 +461,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project the
  *   cluster belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.clusterName
  *   Required. The cluster name.
  * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
@@ -472,7 +472,8 @@ export class ClusterControllerClient {
  *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
  *   in progress to finish before forcefully removing nodes (and potentially
  *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
- *   the maximum allowed timeout is 1 day.
+ *   the maximum allowed timeout is 1 day (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   Only supported on Dataproc image versions 1.2 and higher.
  * @param {google.protobuf.FieldMask} request.updateMask
@@ -596,7 +597,7 @@ export class ClusterControllerClient {
 /**
  * Deletes a cluster in a project. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -604,7 +605,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.clusterName
  *   Required. The cluster name.
  * @param {string} [request.clusterUuid]
@@ -670,7 +671,7 @@ export class ClusterControllerClient {
 /**
  * Gets cluster diagnostic information. The returned
  * [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+ * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
  * After the operation completes,
  * [Operation.response][google.longrunning.Operation.response]
  * contains
@@ -682,7 +683,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.clusterName
  *   Required. The cluster name.
  * @param {object} [options]
@@ -740,7 +741,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} [request.filter]
  *   Optional.  A filter constraining the clusters to list. Filters are
  *   case-sensitive and have the following syntax:
@@ -830,7 +831,7 @@ export class ClusterControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the cluster
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} [request.filter]
  *   Optional.  A filter constraining the clusters to list. Filters are
  *   case-sensitive and have the following syntax:

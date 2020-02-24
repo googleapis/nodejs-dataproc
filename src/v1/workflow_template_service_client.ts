@@ -603,9 +603,9 @@ export class WorkflowTemplateServiceClient {
  * clusters to be deleted.
  *
  * The [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [WorkflowMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
+ * [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
  * Also see [Using
- * WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
+ * WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
  *
  * On successful completion,
  * [Operation.response][google.longrunning.Operation.response] will be
@@ -714,9 +714,9 @@ export class WorkflowTemplateServiceClient {
  * clusters to be deleted.
  *
  * The [Operation.metadata][google.longrunning.Operation.metadata] will be
- * [WorkflowMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
+ * [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
  * Also see [Using
- * WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
+ * WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
  *
  * On successful completion,
  * [Operation.response][google.longrunning.Operation.response] will be

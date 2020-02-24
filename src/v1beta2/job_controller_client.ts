@@ -281,10 +281,10 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {google.cloud.dataproc.v1beta2.Job} request.job
  *   Required. The job resource.
- * @param {string} request.requestId
+ * @param {string} [request.requestId]
  *   Optional. A unique id used to identify the request. If the server
  *   receives two [SubmitJobRequest][google.cloud.dataproc.v1beta2.SubmitJobRequest] requests  with the same
  *   id, then the second request will be ignored and the
@@ -350,7 +350,7 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.jobId
  *   Required. The job ID.
  * @param {object} [options]
@@ -407,7 +407,7 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.jobId
  *   Required. The job ID.
  * @param {google.cloud.dataproc.v1beta2.Job} request.job
@@ -467,9 +467,9 @@ export class JobControllerClient {
 /**
  * Starts a job cancellation request. To access the job resource
  * after cancellation, call
- * [regions/{region}/jobs.list](/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
+ * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
  * or
- * [regions/{region}/jobs.get](/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
+ * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -477,7 +477,7 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.jobId
  *   Required. The job ID.
  * @param {object} [options]
@@ -535,7 +535,7 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  * @param {string} request.jobId
  *   Required. The job ID.
  * @param {object} [options]
@@ -594,21 +594,21 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
- * @param {number} request.pageSize
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {number} [request.pageSize]
  *   Optional. The number of results to return in each response.
- * @param {string} request.pageToken
+ * @param {string} [request.pageToken]
  *   Optional. The page token, returned by a previous call, to request the
  *   next page of results.
- * @param {string} request.clusterName
+ * @param {string} [request.clusterName]
  *   Optional. If set, the returned jobs list includes only jobs that were
  *   submitted to the named cluster.
- * @param {google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher} request.jobStateMatcher
+ * @param {google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
  *   Optional. Specifies enumerated categories of jobs to list.
  *   (default = match ALL jobs).
  *
  *   If `filter` is provided, `jobStateMatcher` will be ignored.
- * @param {string} request.filter
+ * @param {string} [request.filter]
  *   Optional. A filter constraining the jobs to list. Filters are
  *   case-sensitive and have the following syntax:
  *
@@ -688,21 +688,21 @@ export class JobControllerClient {
  *   Required. The ID of the Google Cloud Platform project that the job
  *   belongs to.
  * @param {string} request.region
- *   Required. The Cloud Dataproc region in which to handle the request.
- * @param {number} request.pageSize
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {number} [request.pageSize]
  *   Optional. The number of results to return in each response.
- * @param {string} request.pageToken
+ * @param {string} [request.pageToken]
  *   Optional. The page token, returned by a previous call, to request the
  *   next page of results.
- * @param {string} request.clusterName
+ * @param {string} [request.clusterName]
  *   Optional. If set, the returned jobs list includes only jobs that were
  *   submitted to the named cluster.
- * @param {google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher} request.jobStateMatcher
+ * @param {google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
  *   Optional. Specifies enumerated categories of jobs to list.
  *   (default = match ALL jobs).
  *
  *   If `filter` is provided, `jobStateMatcher` will be ignored.
- * @param {string} request.filter
+ * @param {string} [request.filter]
  *   Optional. A filter constraining the jobs to list. Filters are
  *   case-sensitive and have the following syntax:
  *
