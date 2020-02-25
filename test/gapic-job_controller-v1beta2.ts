@@ -18,352 +18,340 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 const jobcontrollerModule = require('../src');
 
+
 const FAKE_STATUS_CODE = 1;
-class FakeError {
-  name: string;
-  message: string;
-  code: number;
-  constructor(n: number) {
-    this.name = 'fakeName';
-    this.message = 'fake message';
-    this.code = n;
-  }
+class FakeError{
+    name: string;
+    message: string;
+    code: number;
+    constructor(n: number){
+        this.name = 'fakeName';
+        this.message = 'fake message';
+        this.code = n;
+    }
 }
 const error = new FakeError(FAKE_STATUS_CODE);
 export interface Callback {
-  (err: FakeError | null, response?: {} | null): void;
+  (err: FakeError|null, response?: {} | null): void;
 }
 
-export class Operation {
-  constructor() {}
-  promise() {}
+export class Operation{
+    constructor(){};
+    promise() {};
 }
-function mockSimpleGrpcMethod(
-  expectedRequest: {},
-  response: {} | null,
-  error: FakeError | null
-) {
-  return (actualRequest: {}, options: {}, callback: Callback) => {
-    assert.deepStrictEqual(actualRequest, expectedRequest);
-    if (error) {
-      callback(error);
-    } else if (response) {
-      callback(null, response);
-    } else {
-      callback(null);
-    }
-  };
+function mockSimpleGrpcMethod(expectedRequest: {}, response: {} | null, error: FakeError | null) {
+    return (actualRequest: {}, options: {}, callback: Callback) => {
+        assert.deepStrictEqual(actualRequest, expectedRequest);
+        if (error) {
+            callback(error);
+        } else if (response) {
+            callback(null, response);
+        } else {
+            callback(null);
+        }
+    };
 }
 describe('v1beta2.JobControllerClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      jobcontrollerModule.v1beta2.JobControllerClient.servicePath;
-    assert(servicePath);
-  });
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      jobcontrollerModule.v1beta2.JobControllerClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-  it('has port', () => {
-    const port = jobcontrollerModule.v1beta2.JobControllerClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-  it('should create a client with no option', () => {
-    const client = new jobcontrollerModule.v1beta2.JobControllerClient();
-    assert(client);
-  });
-  it('should create a client with gRPC fallback', () => {
-    const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-      fallback: true,
+    it('has servicePath', () => {
+        const servicePath = jobcontrollerModule.v1beta2.JobControllerClient.servicePath;
+        assert(servicePath);
     });
-    assert(client);
-  });
-  describe('submitJob', () => {
-    it('invokes submitJob without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.ISubmitJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.submitJob = mockSimpleGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      client.submitJob(request, (err: {}, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
+    it('has apiEndpoint', () => {
+        const apiEndpoint = jobcontrollerModule.v1beta2.JobControllerClient.apiEndpoint;
+        assert(apiEndpoint);
     });
-
-    it('invokes submitJob with error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.ISubmitJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.submitJob = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-      client.submitJob(request, (err: FakeError, response: {}) => {
-        assert(err instanceof FakeError);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
+    it('has port', () => {
+        const port = jobcontrollerModule.v1beta2.JobControllerClient.port;
+        assert(port);
+        assert(typeof port === 'number');
     });
-  });
-  describe('getJob', () => {
-    it('invokes getJob without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IGetJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.getJob = mockSimpleGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      client.getJob(request, (err: {}, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
+    it('should create a client with no option', () => {
+        const client = new jobcontrollerModule.v1beta2.JobControllerClient();
+        assert(client);
     });
-
-    it('invokes getJob with error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IGetJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.getJob = mockSimpleGrpcMethod(request, null, error);
-      client.getJob(request, (err: FakeError, response: {}) => {
-        assert(err instanceof FakeError);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-  describe('updateJob', () => {
-    it('invokes updateJob without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IUpdateJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.updateJob = mockSimpleGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      client.updateJob(request, (err: {}, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes updateJob with error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IUpdateJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.updateJob = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-      client.updateJob(request, (err: FakeError, response: {}) => {
-        assert(err instanceof FakeError);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-  describe('cancelJob', () => {
-    it('invokes cancelJob without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.ICancelJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.cancelJob = mockSimpleGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      client.cancelJob(request, (err: {}, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes cancelJob with error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.ICancelJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.cancelJob = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-      client.cancelJob(request, (err: FakeError, response: {}) => {
-        assert(err instanceof FakeError);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-  describe('deleteJob', () => {
-    it('invokes deleteJob without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IDeleteJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.deleteJob = mockSimpleGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      client.deleteJob(request, (err: {}, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes deleteJob with error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IDeleteJobRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.deleteJob = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-      client.deleteJob(request, (err: FakeError, response: {}) => {
-        assert(err instanceof FakeError);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-  describe('listJobs', () => {
-    it('invokes listJobs without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IListJobsRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock Grpc layer
-      client._innerApiCalls.listJobs = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      client.listJobs(request, (err: FakeError, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-  });
-  describe('listJobsStream', () => {
-    it('invokes listJobsStream without error', done => {
-      const client = new jobcontrollerModule.v1beta2.JobControllerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.dataproc.v1beta2.IListJobsRequest = {};
-      // Mock response
-      const expectedResponse = {response: 'data'};
-      // Mock Grpc layer
-      client._innerApiCalls.listJobs = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      const stream = client
-        .listJobsStream(request, {})
-        .on('data', (response: {}) => {
-          assert.deepStrictEqual(response, expectedResponse);
-          done();
-        })
-        .on('error', (err: FakeError) => {
-          done(err);
+    it('should create a client with gRPC fallback', () => {
+        const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+            fallback: true,
         });
-      stream.write(expectedResponse);
+        assert(client);
     });
-  });
+    describe('submitJob', () => {
+        it('invokes submitJob without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.ISubmitJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.submitJob = mockSimpleGrpcMethod(
+                request,
+                expectedResponse,
+                null
+            );
+            client.submitJob(request, (err: {}, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            })
+        });
+
+        it('invokes submitJob with error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.ISubmitJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.submitJob = mockSimpleGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.submitJob(request, (err: FakeError, response: {}) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                assert(typeof response === 'undefined');
+                done();
+            })
+        });
+    });
+    describe('getJob', () => {
+        it('invokes getJob without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IGetJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.getJob = mockSimpleGrpcMethod(
+                request,
+                expectedResponse,
+                null
+            );
+            client.getJob(request, (err: {}, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            })
+        });
+
+        it('invokes getJob with error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IGetJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.getJob = mockSimpleGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.getJob(request, (err: FakeError, response: {}) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                assert(typeof response === 'undefined');
+                done();
+            })
+        });
+    });
+    describe('updateJob', () => {
+        it('invokes updateJob without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IUpdateJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.updateJob = mockSimpleGrpcMethod(
+                request,
+                expectedResponse,
+                null
+            );
+            client.updateJob(request, (err: {}, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            })
+        });
+
+        it('invokes updateJob with error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IUpdateJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.updateJob = mockSimpleGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.updateJob(request, (err: FakeError, response: {}) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                assert(typeof response === 'undefined');
+                done();
+            })
+        });
+    });
+    describe('cancelJob', () => {
+        it('invokes cancelJob without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.ICancelJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.cancelJob = mockSimpleGrpcMethod(
+                request,
+                expectedResponse,
+                null
+            );
+            client.cancelJob(request, (err: {}, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            })
+        });
+
+        it('invokes cancelJob with error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.ICancelJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.cancelJob = mockSimpleGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.cancelJob(request, (err: FakeError, response: {}) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                assert(typeof response === 'undefined');
+                done();
+            })
+        });
+    });
+    describe('deleteJob', () => {
+        it('invokes deleteJob without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IDeleteJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.deleteJob = mockSimpleGrpcMethod(
+                request,
+                expectedResponse,
+                null
+            );
+            client.deleteJob(request, (err: {}, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            })
+        });
+
+        it('invokes deleteJob with error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IDeleteJobRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.deleteJob = mockSimpleGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.deleteJob(request, (err: FakeError, response: {}) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                assert(typeof response === 'undefined');
+                done();
+            })
+        });
+    });
+    describe('listJobs', () => {
+        it('invokes listJobs without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IListJobsRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock Grpc layer
+            client._innerApiCalls.listJobs = (actualRequest: {}, options: {}, callback: Callback) => {
+                assert.deepStrictEqual(actualRequest, request);
+                callback(null, expectedResponse);
+            };
+            client.listJobs(request, (err: FakeError, response: {}) => {
+                assert.ifError(err);
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            });
+        });
+    });
+    describe('listJobsStream', () => {
+        it('invokes listJobsStream without error', done => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Mock request
+            const request: protosTypes.google.cloud.dataproc.v1beta2.IListJobsRequest = {};
+            // Mock response
+            const expectedResponse = {response: 'data'};
+            // Mock Grpc layer
+            client._innerApiCalls.listJobs = (actualRequest: {}, options: {}, callback: Callback) => {
+                assert.deepStrictEqual(actualRequest, request);
+                callback(null, expectedResponse);
+            };
+            const stream = client.listJobsStream(request, {}).on('data', (response: {}) =>{
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            }).on('error', (err: FakeError) => {
+                done(err);
+            });
+            stream.write(expectedResponse);
+        });
+    });
 });
