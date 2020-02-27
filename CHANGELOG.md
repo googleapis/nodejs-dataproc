@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.6.0...v1.6.1) (2020-02-27)
+
+
+### Bug Fixes
+
+* dataproc v1 AutoscalingPolicy annotation ([943585d](https://www.github.com/googleapis/nodejs-dataproc/commit/943585d1d5fd9d1126dc2af7e9f7b769ef57fb38)), closes [#306](https://www.github.com/googleapis/nodejs-dataproc/issues/306) [#303](https://www.github.com/googleapis/nodejs-dataproc/issues/303) [#305](https://www.github.com/googleapis/nodejs-dataproc/issues/305)
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.5.0...v1.6.0) (2020-02-10)
 
 
