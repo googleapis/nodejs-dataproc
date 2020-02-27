@@ -22,7 +22,7 @@ const VERSION = require('../../package.json').version;
 
 /**
  * The API interface for managing Workflow Templates in the
- * Cloud Dataproc API.
+ * Dataproc API.
  *
  * @class
  * @memberof v1beta2

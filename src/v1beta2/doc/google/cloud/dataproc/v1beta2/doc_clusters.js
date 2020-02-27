@@ -27,7 +27,7 @@
  *   unique. Names of deleted clusters can be reused.
  *
  * @property {Object} config
- *   Required. The cluster config. Note that Cloud Dataproc may set
+ *   Required. The cluster config. Note that Dataproc may set
  *   default values, and values may change when clusters are updated.
  *
  *   This object should have the same structure as [ClusterConfig]{@link google.cloud.dataproc.v1beta2.ClusterConfig}
@@ -52,7 +52,7 @@
  *   This object should have the same structure as [ClusterStatus]{@link google.cloud.dataproc.v1beta2.ClusterStatus}
  *
  * @property {string} clusterUuid
- *   Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc
+ *   Output only. A cluster UUID (Unique Universal Identifier). Dataproc
  *   generates this value when it creates the cluster.
  *
  * @property {Object} metrics
@@ -75,14 +75,14 @@ const Cluster = {
  * The cluster config.
  *
  * @property {string} configBucket
- *   Optional. A Google Cloud Storage bucket used to stage job
+ *   Optional. A Cloud Storage bucket used to stage job
  *   dependencies, config files, and job driver console output.
  *   If you do not specify a staging bucket, Cloud
  *   Dataproc will determine a Cloud Storage location (US,
- *   ASIA, or EU) for your cluster's staging bucket according to the Google
+ *   ASIA, or EU) for your cluster's staging bucket according to the
  *   Compute Engine zone where your cluster is deployed, and then create
  *   and manage this project-level, per-location bucket (see
- *   [Cloud Dataproc staging
+ *   [Dataproc staging
  *   bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
  *
  * @property {Object} gceClusterConfig
@@ -196,7 +196,7 @@ const EndpointConfig = {
  *   * `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
  *   * `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
  *
- *   Note that the policy must be in the same project and Cloud Dataproc region.
+ *   Note that the policy must be in the same project and Dataproc region.
  *
  * @typedef AutoscalingConfig
  * @memberof google.cloud.dataproc.v1beta2
@@ -228,7 +228,7 @@ const EncryptionConfig = {
  * @property {string} zoneUri
  *   Optional. The zone where the Compute Engine cluster will be located.
  *   On a create request, it is required in the "global" region. If omitted
- *   in a non-global Cloud Dataproc region, the service will pick a zone in the
+ *   in a non-global Dataproc region, the service will pick a zone in the
  *   corresponding Compute Engine region. On a get request, zone will always be
  *   present.
  *
@@ -270,17 +270,17 @@ const EncryptionConfig = {
  *   configured to be accessible without external IP addresses.
  *
  * @property {string} serviceAccount
- *   Optional. The service account of the instances. Defaults to the default
- *   Compute Engine service account. Custom service accounts need
- *   permissions equivalent to the following IAM roles:
+ *   Optional. The [Dataproc service
+ *   account](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc)
+ *   (also see [VM Data Plane
+ *   identity](https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity))
+ *   used by Dataproc cluster VM instances to access Google Cloud Platform
+ *   services.
  *
- *   * roles/logging.logWriter
- *   * roles/storage.objectAdmin
- *
- *   (see
- *   https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
- *   for more information).
- *   Example: `[account_id]@[project_id].iam.gserviceaccount.com`
+ *   If not specified, the
+ *   [Compute Engine default service
+ *   account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account)
+ *   is used.
  *
  * @property {string[]} serviceAccountScopes
  *   Optional. The URIs of service account scopes to be included in
@@ -329,7 +329,7 @@ const GceClusterConfig = {
  *   For master instance groups, must be set to 1.
  *
  * @property {string[]} instanceNames
- *   Output only. The list of instance names. Cloud Dataproc derives the names
+ *   Output only. The list of instance names. Dataproc derives the names
  *   from `cluster_name`, `num_instances`, and the instance group.
  *
  * @property {string} imageUri
@@ -346,7 +346,7 @@ const GceClusterConfig = {
  *   * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
  *   * `n1-standard-2`
  *
- *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   **Auto Zone Exception**: If you are using the Dataproc
  *   [Auto Zone
  *   Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
  *   feature, you must use the short name of the machine type
@@ -376,7 +376,7 @@ const GceClusterConfig = {
  *
  * @property {string} minCpuPlatform
  *   Specifies the minimum cpu platform for the Instance Group.
- *   See [Cloud Dataproc&rarr;Minimum CPU Platform]
+ *   See [Dataproc&rarr;Minimum CPU Platform]
  *   (/dataproc/docs/concepts/compute/dataproc-min-cpu).
  *
  * @typedef InstanceGroupConfig
@@ -420,7 +420,7 @@ const ManagedGroupConfig = {
  *   * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
  *   * `nvidia-tesla-k80`
  *
- *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   **Auto Zone Exception**: If you are using the Dataproc
  *   [Auto Zone
  *   Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
  *   feature, you must use the short name of the accelerator type
@@ -468,31 +468,33 @@ const DiskConfig = {
  * Specifies the cluster auto-delete schedule configuration.
  *
  * @property {Object} idleDeleteTtl
- *   Optional. The duration to keep the cluster alive while idling.
- *   Passing this threshold will cause the cluster to be
- *   deleted. Valid range: **[10m, 14d]**.
- *
- *   Example: **"10m"**, the minimum value, to delete the
- *   cluster when it has had no jobs running for 10 minutes.
+ *   Optional. The duration to keep the cluster alive while idling (when no jobs
+ *   are running). Passing this threshold will cause the cluster to be
+ *   deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON
+ *   representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} autoDeleteTime
- *   Optional. The time when cluster will be auto-deleted.
+ *   Optional. The time when cluster will be auto-deleted. (see JSON representation of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} autoDeleteTtl
  *   Optional. The lifetime duration of cluster. The cluster will be
- *   auto-deleted at the end of this period. Valid range: **[10m, 14d]**.
- *
- *   Example: **"1d"**, to delete the cluster 1 day after its creation..
+ *   auto-deleted at the end of this period. Minimum value is 10 minutes;
+ *   maximum value is 14 days (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} idleStartTime
  *   Output only. The time when cluster became idle (most recent job finished)
- *   and became eligible for deletion due to idleness.
+ *   and became eligible for deletion due to idleness (see JSON representation
+ *   of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -606,7 +608,10 @@ const KerberosConfig = {
  *
  * @property {Object} executionTimeout
  *   Optional. Amount of time executable has to complete. Default is
- *   10 minutes. Cluster creation fails with an explanatory error message (the
+ *   10 minutes (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   Cluster creation fails with an explanatory error message (the
  *   name of the executable that caused the error and the exceeded timeout
  *   period) if the executable is not completed at end of the timeout period.
  *
@@ -632,7 +637,8 @@ const NodeInitializationAction = {
  *   Output only. Optional details of cluster's state.
  *
  * @property {Object} stateStartTime
- *   Output only. Time when this state was entered.
+ *   Output only. Time when this state was entered (see JSON representation of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -712,7 +718,7 @@ const ClusterStatus = {
 
     /**
      * The agent-reported status is out of date (may occur if
-     * Cloud Dataproc loses communication with Agent).
+     * Dataproc loses communication with Agent).
      *
      * Applies to RUNNING state.
      */
@@ -725,7 +731,7 @@ const ClusterStatus = {
  *
  * @property {string} imageVersion
  *   Optional. The version of software inside the cluster. It must be one of the
- *   supported [Cloud Dataproc
+ *   supported [Dataproc
  *   Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
  *   such as "1.2" (including a subminor version, such as "1.2.29"), or the
  *   ["preview"
@@ -793,7 +799,7 @@ const ClusterMetrics = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {Object} cluster
  *   Required. The cluster to create.
@@ -829,7 +835,7 @@ const CreateClusterRequest = {
  *   cluster belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -845,7 +851,8 @@ const CreateClusterRequest = {
  *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
  *   in progress to finish before forcefully removing nodes (and potentially
  *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
- *   the maximum allowed timeout is 1 day.
+ *   the maximum allowed timeout is 1 day (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   Only supported on Dataproc image versions 1.2 and higher.
  *
@@ -944,7 +951,7 @@ const UpdateClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -982,7 +989,7 @@ const DeleteClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -1003,7 +1010,7 @@ const GetClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} filter
  *   Optional.  A filter constraining the clusters to list. Filters are
@@ -1069,7 +1076,7 @@ const ListClustersResponse = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.

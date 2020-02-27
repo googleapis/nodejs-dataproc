@@ -147,6 +147,11 @@ const Cluster = {
  *
  *   This object should have the same structure as [SecurityConfig]{@link google.cloud.dataproc.v1.SecurityConfig}
  *
+ * @property {Object} lifecycleConfig
+ *   Optional. Lifecycle setting for the cluster.
+ *
+ *   This object should have the same structure as [LifecycleConfig]{@link google.cloud.dataproc.v1.LifecycleConfig}
+ *
  * @typedef ClusterConfig
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
@@ -278,6 +283,11 @@ const EncryptionConfig = {
  *   [Project and instance
  *   metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
  *
+ * @property {Object} reservationAffinity
+ *   Optional. Reservation Affinity for consuming Zonal reservation.
+ *
+ *   This object should have the same structure as [ReservationAffinity]{@link google.cloud.dataproc.v1.ReservationAffinity}
+ *
  * @typedef GceClusterConfig
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.GceClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
@@ -287,7 +297,7 @@ const GceClusterConfig = {
 };
 
 /**
- * Optional. The config settings for Compute Engine resources in
+ * The config settings for Compute Engine resources in
  * an instance group, such as a master or worker group.
  *
  * @property {number} numInstances
@@ -440,7 +450,10 @@ const DiskConfig = {
  *
  * @property {Object} executionTimeout
  *   Optional. Amount of time executable has to complete. Default is
- *   10 minutes. Cluster creation fails with an explanatory error message (the
+ *   10 minutes (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   Cluster creation fails with an explanatory error message (the
  *   name of the executable that caused the error and the exceeded timeout
  *   period) if the executable is not completed at end of the timeout period.
  *
@@ -466,7 +479,8 @@ const NodeInitializationAction = {
  *   Optional. Output only. Details of cluster's state.
  *
  * @property {Object} stateStartTime
- *   Output only. Time when this state was entered.
+ *   Output only. Time when this state was entered (see JSON representation of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -693,6 +707,48 @@ const SoftwareConfig = {
 };
 
 /**
+ * Specifies the cluster auto-delete schedule configuration.
+ *
+ * @property {Object} idleDeleteTtl
+ *   Optional. The duration to keep the cluster alive while idling (when no jobs
+ *   are running). Passing this threshold will cause the cluster to be
+ *   deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON
+ *   representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} autoDeleteTime
+ *   Optional. The time when cluster will be auto-deleted (see JSON representation of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} autoDeleteTtl
+ *   Optional. The lifetime duration of cluster. The cluster will be
+ *   auto-deleted at the end of this period. Minimum value is 10 minutes;
+ *   maximum value is 14 days (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} idleStartTime
+ *   Output only. The time when cluster became idle (most recent job finished)
+ *   and became eligible for deletion due to idleness (see JSON representation
+ *   of
+ *   [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef LifecycleConfig
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.LifecycleConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const LifecycleConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Contains cluster daemon metrics, such as HDFS and YARN stats.
  *
  * **Beta Feature**: This report is available for testing purposes only. It may
@@ -772,7 +828,8 @@ const CreateClusterRequest = {
  *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
  *   in progress to finish before forcefully removing nodes (and potentially
  *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
- *   the maximum allowed timeout is 1 day.
+ *   the maximum allowed timeout is 1 day. (see JSON representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
  *
  *   Only supported on Dataproc image versions 1.2 and higher.
  *
@@ -1014,4 +1071,52 @@ const DiagnoseClusterRequest = {
  */
 const DiagnoseClusterResults = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Reservation Affinity for consuming Zonal reservation.
+ *
+ * @property {number} consumeReservationType
+ *   Optional. Type of reservation to consume
+ *
+ *   The number should be among the values of [Type]{@link google.cloud.dataproc.v1.Type}
+ *
+ * @property {string} key
+ *   Optional. Corresponds to the label key of reservation resource.
+ *
+ * @property {string[]} values
+ *   Optional. Corresponds to the label values of reservation resource.
+ *
+ * @typedef ReservationAffinity
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.ReservationAffinity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const ReservationAffinity = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Indicates whether to consume capacity from an reservation or not.
+   *
+   * @enum {number}
+   * @memberof google.cloud.dataproc.v1
+   */
+  Type: {
+    TYPE_UNSPECIFIED: 0,
+
+    /**
+     * Do not consume from any allocated capacity.
+     */
+    NO_RESERVATION: 1,
+
+    /**
+     * Consume any reservation available.
+     */
+    ANY_RESERVATION: 2,
+
+    /**
+     * Must consume from a specific reservation. Must specify key value fields
+     * for specifying the reservations.
+     */
+    SPECIFIC_RESERVATION: 3
+  }
 };
