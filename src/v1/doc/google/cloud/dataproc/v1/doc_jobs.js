@@ -392,6 +392,89 @@ const PigJob = {
 };
 
 /**
+ * A Dataproc job for running
+ * [Apache SparkR](https://spark.apache.org/docs/latest/sparkr.html)
+ * applications on YARN.
+ *
+ * @property {string} mainRFileUri
+ *   Required. The HCFS URI of the main R file to use as the driver.
+ *   Must be a .R file.
+ *
+ * @property {string[]} args
+ *   Optional. The arguments to pass to the driver.  Do not include arguments,
+ *   such as `--conf`, that can be set as job properties, since a collision may
+ *   occur that causes an incorrect job submission.
+ *
+ * @property {string[]} fileUris
+ *   Optional. HCFS URIs of files to be copied to the working directory of
+ *   R drivers and distributed tasks. Useful for naively parallel tasks.
+ *
+ * @property {string[]} archiveUris
+ *   Optional. HCFS URIs of archives to be extracted in the working directory of
+ *   Spark drivers and tasks. Supported file types:
+ *   .jar, .tar, .tar.gz, .tgz, and .zip.
+ *
+ * @property {Object.<string, string>} properties
+ *   Optional. A mapping of property names to values, used to configure SparkR.
+ *   Properties that conflict with values set by the Dataproc API may be
+ *   overwritten. Can include properties set in
+ *   /etc/spark/conf/spark-defaults.conf and classes in user code.
+ *
+ * @property {Object} loggingConfig
+ *   Optional. The runtime log config for job execution.
+ *
+ *   This object should have the same structure as [LoggingConfig]{@link google.cloud.dataproc.v1.LoggingConfig}
+ *
+ * @typedef SparkRJob
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.SparkRJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
+ */
+const SparkRJob = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A Dataproc job for running [Presto](https://prestosql.io/) queries
+ *
+ * @property {string} queryFileUri
+ *   The HCFS URI of the script that contains SQL queries.
+ *
+ * @property {Object} queryList
+ *   A list of queries.
+ *
+ *   This object should have the same structure as [QueryList]{@link google.cloud.dataproc.v1.QueryList}
+ *
+ * @property {boolean} continueOnFailure
+ *   Optional. Whether to continue executing queries if a query fails.
+ *   The default value is `false`. Setting to `true` can be useful when
+ *   executing independent parallel queries.
+ *
+ * @property {string} outputFormat
+ *   Optional. The format in which query output will be displayed. See the
+ *   Presto documentation for supported output formats
+ *
+ * @property {string[]} clientTags
+ *   Optional. Presto client tags to attach to this query
+ *
+ * @property {Object.<string, string>} properties
+ *   Optional. A mapping of property names to values. Used to set Presto
+ *   [session properties](https://prestodb.io/docs/current/sql/set-session.html)
+ *   Equivalent to using the --session flag in the Presto CLI
+ *
+ * @property {Object} loggingConfig
+ *   Optional. The runtime log config for job execution.
+ *
+ *   This object should have the same structure as [LoggingConfig]{@link google.cloud.dataproc.v1.LoggingConfig}
+ *
+ * @typedef PrestoJob
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.PrestoJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
+ */
+const PrestoJob = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Dataproc job config.
  *
  * @property {string} clusterName
@@ -671,34 +754,44 @@ const YarnApplication = {
  *   This object should have the same structure as [JobPlacement]{@link google.cloud.dataproc.v1.JobPlacement}
  *
  * @property {Object} hadoopJob
- *   Job is a Hadoop job.
+ *   Optional. Job is a Hadoop job.
  *
  *   This object should have the same structure as [HadoopJob]{@link google.cloud.dataproc.v1.HadoopJob}
  *
  * @property {Object} sparkJob
- *   Job is a Spark job.
+ *   Optional. Job is a Spark job.
  *
  *   This object should have the same structure as [SparkJob]{@link google.cloud.dataproc.v1.SparkJob}
  *
  * @property {Object} pysparkJob
- *   Job is a Pyspark job.
+ *   Optional. Job is a PySpark job.
  *
  *   This object should have the same structure as [PySparkJob]{@link google.cloud.dataproc.v1.PySparkJob}
  *
  * @property {Object} hiveJob
- *   Job is a Hive job.
+ *   Optional. Job is a Hive job.
  *
  *   This object should have the same structure as [HiveJob]{@link google.cloud.dataproc.v1.HiveJob}
  *
  * @property {Object} pigJob
- *   Job is a Pig job.
+ *   Optional. Job is a Pig job.
  *
  *   This object should have the same structure as [PigJob]{@link google.cloud.dataproc.v1.PigJob}
  *
+ * @property {Object} sparkRJob
+ *   Optional. Job is a SparkR job.
+ *
+ *   This object should have the same structure as [SparkRJob]{@link google.cloud.dataproc.v1.SparkRJob}
+ *
  * @property {Object} sparkSqlJob
- *   Job is a SparkSql job.
+ *   Optional. Job is a SparkSql job.
  *
  *   This object should have the same structure as [SparkSqlJob]{@link google.cloud.dataproc.v1.SparkSqlJob}
+ *
+ * @property {Object} prestoJob
+ *   Optional. Job is a Presto job.
+ *
+ *   This object should have the same structure as [PrestoJob]{@link google.cloud.dataproc.v1.PrestoJob}
  *
  * @property {Object} status
  *   Output only. The job status. Additional application-specific
