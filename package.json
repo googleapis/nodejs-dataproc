@@ -46,13 +46,9 @@
     "protobufjs": "^6.8.6"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "c8": "^7.0.0",
-=======
     "@types/mocha": "^7.0.1",
     "@types/node": "^12.0.0",
     "c8": "^7.1.0",
->>>>>>> 1cce020e5c929be23bdd8334bcc77624f3b71c58
     "codecov": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
@@ -62,12 +58,7 @@
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
-<<<<<<< HEAD
     "linkinator": "^2.0.2",
-    "mocha": "^7.0.0",
-    "prettier": "^1.13.3"
-=======
-    "linkinator": "^2.0.1",
     "mocha": "^7.0.0",
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
@@ -76,6 +67,5 @@
     "typescript": "^3.7.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
->>>>>>> 1cce020e5c929be23bdd8334bcc77624f3b71c58
   }
 }
