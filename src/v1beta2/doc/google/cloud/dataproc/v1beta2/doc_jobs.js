@@ -89,7 +89,7 @@ const LoggingConfig = {
 };
 
 /**
- * A Cloud Dataproc job for running
+ * A Dataproc job for running
  * [Apache Hadoop
  * MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
  * jobs on [Apache Hadoop
@@ -128,7 +128,7 @@ const LoggingConfig = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure Hadoop.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in /etc/hadoop/conf/*-site and
  *   classes in user code.
  *
@@ -146,7 +146,7 @@ const HadoopJob = {
 };
 
 /**
- * A Cloud Dataproc job for running [Apache Spark](http://spark.apache.org/)
+ * A Dataproc job for running [Apache Spark](http://spark.apache.org/)
  * applications on YARN.
  * The specification of the main method to call to drive the job.
  * Specify either the jar file that contains the main class or the main class
@@ -181,7 +181,7 @@ const HadoopJob = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure Spark.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in
  *   /etc/spark/conf/spark-defaults.conf and classes in user code.
  *
@@ -199,7 +199,7 @@ const SparkJob = {
 };
 
 /**
- * A Cloud Dataproc job for running
+ * A Dataproc job for running
  * [Apache
  * PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
  * applications on YARN.
@@ -231,7 +231,7 @@ const SparkJob = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure PySpark.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in
  *   /etc/spark/conf/spark-defaults.conf and classes in user code.
  *
@@ -276,7 +276,7 @@ const QueryList = {
 };
 
 /**
- * A Cloud Dataproc job for running [Apache Hive](https://hive.apache.org/)
+ * A Dataproc job for running [Apache Hive](https://hive.apache.org/)
  * queries on YARN.
  *
  * @property {string} queryFileUri
@@ -298,7 +298,7 @@ const QueryList = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names and values, used to configure Hive.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
  *   /etc/hive/conf/hive-site.xml, and classes in user code.
  *
@@ -316,7 +316,7 @@ const HiveJob = {
 };
 
 /**
- * A Cloud Dataproc job for running [Apache Spark
+ * A Dataproc job for running [Apache Spark
  * SQL](http://spark.apache.org/sql/) queries.
  *
  * @property {string} queryFileUri
@@ -334,7 +334,7 @@ const HiveJob = {
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure
  *   Spark SQL's SparkConf. Properties that conflict with values set by the
- *   Cloud Dataproc API may be overwritten.
+ *   Dataproc API may be overwritten.
  *
  * @property {string[]} jarFileUris
  *   Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
@@ -353,7 +353,7 @@ const SparkSqlJob = {
 };
 
 /**
- * A Cloud Dataproc job for running [Apache Pig](https://pig.apache.org/)
+ * A Dataproc job for running [Apache Pig](https://pig.apache.org/)
  * queries on YARN.
  *
  * @property {string} queryFileUri
@@ -375,7 +375,7 @@ const SparkSqlJob = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure Pig.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
  *   /etc/pig/conf/pig.properties, and classes in user code.
  *
@@ -397,7 +397,7 @@ const PigJob = {
 };
 
 /**
- * A Cloud Dataproc job for running
+ * A Dataproc job for running
  * [Apache SparkR](https://spark.apache.org/docs/latest/sparkr.html)
  * applications on YARN.
  *
@@ -421,7 +421,7 @@ const PigJob = {
  *
  * @property {Object.<string, string>} properties
  *   Optional. A mapping of property names to values, used to configure SparkR.
- *   Properties that conflict with values set by the Cloud Dataproc API may be
+ *   Properties that conflict with values set by the Dataproc API may be
  *   overwritten. Can include properties set in
  *   /etc/spark/conf/spark-defaults.conf and classes in user code.
  *
@@ -439,13 +439,13 @@ const SparkRJob = {
 };
 
 /**
- * Cloud Dataproc job config.
+ * Dataproc job config.
  *
  * @property {string} clusterName
  *   Required. The name of the cluster where the job will be submitted.
  *
  * @property {string} clusterUuid
- *   Output only. A cluster UUID generated by the Cloud Dataproc service when
+ *   Output only. A cluster UUID generated by the Dataproc service when
  *   the job is submitted.
  *
  * @typedef JobPlacement
@@ -457,7 +457,7 @@ const JobPlacement = {
 };
 
 /**
- * Cloud Dataproc job status.
+ * Dataproc job status.
  *
  * @property {number} state
  *   Output only. A state message specifying the overall job state.
@@ -465,7 +465,7 @@ const JobPlacement = {
  *   The number should be among the values of [State]{@link google.cloud.dataproc.v1beta2.State}
  *
  * @property {string} details
- *   Output only. Optional job state details, such as an error
+ *   Output only. Optional Job state details, such as an error
  *   description if the state is <code>ERROR</code>.
  *
  * @property {Object} stateStartTime
@@ -581,7 +581,7 @@ const JobStatus = {
 
     /**
      * The agent-reported status is out of date, which may be caused by a
-     * loss of communication between the agent and Cloud Dataproc. If the
+     * loss of communication between the agent and Dataproc. If the
      * agent does not send a timely update, the job will fail.
      *
      * Applies to RUNNING state.
@@ -599,7 +599,6 @@ const JobStatus = {
  *
  * @property {string} jobId
  *   Optional. The job ID, which must be unique within the project.
- *
  *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
  *   underscores (_), or hyphens (-). The maximum length is 100 characters.
  *
@@ -632,7 +631,7 @@ const JobReference = {
  *   Output only. The numerical progress of the application, from 1 to 100.
  *
  * @property {string} trackingUrl
- *   Optional. Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or
+ *   Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or
  *   TimelineServer that provides application-specific information. The URL uses
  *   the internal hostname, and requires a proxy server for resolution and,
  *   possibly, access.
@@ -701,7 +700,7 @@ const YarnApplication = {
 };
 
 /**
- * A Cloud Dataproc job resource.
+ * A Dataproc job resource.
  *
  * @property {Object} reference
  *   Optional. The fully qualified reference to the job, which can be used to
@@ -718,38 +717,24 @@ const YarnApplication = {
  *   This object should have the same structure as [JobPlacement]{@link google.cloud.dataproc.v1beta2.JobPlacement}
  *
  * @property {Object} hadoopJob
- *   Job is a Hadoop job.
- *
  *   This object should have the same structure as [HadoopJob]{@link google.cloud.dataproc.v1beta2.HadoopJob}
  *
  * @property {Object} sparkJob
- *   Job is a Spark job.
- *
  *   This object should have the same structure as [SparkJob]{@link google.cloud.dataproc.v1beta2.SparkJob}
  *
  * @property {Object} pysparkJob
- *   Job is a Pyspark job.
- *
  *   This object should have the same structure as [PySparkJob]{@link google.cloud.dataproc.v1beta2.PySparkJob}
  *
  * @property {Object} hiveJob
- *   Job is a Hive job.
- *
  *   This object should have the same structure as [HiveJob]{@link google.cloud.dataproc.v1beta2.HiveJob}
  *
  * @property {Object} pigJob
- *   Job is a Pig job.
- *
  *   This object should have the same structure as [PigJob]{@link google.cloud.dataproc.v1beta2.PigJob}
  *
  * @property {Object} sparkRJob
- *   Job is a SparkR job.
- *
  *   This object should have the same structure as [SparkRJob]{@link google.cloud.dataproc.v1beta2.SparkRJob}
  *
  * @property {Object} sparkSqlJob
- *   Job is a SparkSql job.
- *
  *   This object should have the same structure as [SparkSqlJob]{@link google.cloud.dataproc.v1beta2.SparkSqlJob}
  *
  * @property {Object} status
@@ -841,7 +826,7 @@ const JobScheduling = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {Object} job
  *   Required. The job resource.
@@ -877,7 +862,7 @@ const SubmitJobRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} jobId
  *   Required. The job ID.
@@ -898,7 +883,7 @@ const GetJobRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {number} pageSize
  *   Optional. The number of results to return in each response.
@@ -976,7 +961,7 @@ const ListJobsRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} jobId
  *   Required. The job ID.
@@ -1033,7 +1018,7 @@ const ListJobsResponse = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} jobId
  *   Required. The job ID.
@@ -1054,7 +1039,7 @@ const CancelJobRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} jobId
  *   Required. The job ID.

@@ -16,7 +16,7 @@
 // to be loaded as the JS file.
 
 /**
- * A Cloud Dataproc workflow template resource.
+ * A Dataproc workflow template resource.
  *
  * @property {string} id
  *   Required. The template id.
@@ -200,33 +200,21 @@ const ClusterSelector = {
  *   or hyphen. Must consist of between 3 and 50 characters.
  *
  * @property {Object} hadoopJob
- *   Job is a Hadoop job.
- *
  *   This object should have the same structure as [HadoopJob]{@link google.cloud.dataproc.v1beta2.HadoopJob}
  *
  * @property {Object} sparkJob
- *   Job is a Spark job.
- *
  *   This object should have the same structure as [SparkJob]{@link google.cloud.dataproc.v1beta2.SparkJob}
  *
  * @property {Object} pysparkJob
- *   Job is a Pyspark job.
- *
  *   This object should have the same structure as [PySparkJob]{@link google.cloud.dataproc.v1beta2.PySparkJob}
  *
  * @property {Object} hiveJob
- *   Job is a Hive job.
- *
  *   This object should have the same structure as [HiveJob]{@link google.cloud.dataproc.v1beta2.HiveJob}
  *
  * @property {Object} pigJob
- *   Job is a Pig job.
- *
  *   This object should have the same structure as [PigJob]{@link google.cloud.dataproc.v1beta2.PigJob}
  *
  * @property {Object} sparkSqlJob
- *   Job is a SparkSql job.
- *
  *   This object should have the same structure as [SparkSqlJob]{@link google.cloud.dataproc.v1beta2.SparkSqlJob}
  *
  * @property {Object.<string, string>} labels
@@ -393,7 +381,7 @@ const ValueValidation = {
 };
 
 /**
- * A Cloud Dataproc workflow template resource.
+ * A Dataproc workflow template resource.
  *
  * @property {string} template
  *   Output only. The resource name of the workflow template as described

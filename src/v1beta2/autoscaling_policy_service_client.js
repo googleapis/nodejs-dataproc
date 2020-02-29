@@ -22,7 +22,7 @@ const VERSION = require('../../package.json').version;
 
 /**
  * The API interface for managing autoscaling policies in the
- * Google Cloud Dataproc API.
+ * Cloud Dataproc API.
  *
  * @class
  * @memberof v1beta2
