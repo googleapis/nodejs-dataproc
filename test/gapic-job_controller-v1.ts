@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const jobcontrollerModule = require('../src');
 
 
@@ -128,8 +129,6 @@ describe('v1.JobControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.submitJob = mockSimpleGrpcMethod(
                 request,
@@ -178,8 +177,6 @@ describe('v1.JobControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.getJob = mockSimpleGrpcMethod(
                 request,
@@ -228,8 +225,6 @@ describe('v1.JobControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.updateJob = mockSimpleGrpcMethod(
                 request,
@@ -278,8 +273,6 @@ describe('v1.JobControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.cancelJob = mockSimpleGrpcMethod(
                 request,
@@ -328,8 +321,6 @@ describe('v1.JobControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.deleteJob = mockSimpleGrpcMethod(
                 request,

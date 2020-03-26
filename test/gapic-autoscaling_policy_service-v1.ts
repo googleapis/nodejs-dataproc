@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const autoscalingpolicyserviceModule = require('../src');
 
 
@@ -130,8 +131,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest = {};
             request.parent = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.createAutoscalingPolicy = mockSimpleGrpcMethod(
                 request,
@@ -184,8 +183,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest = {};
             request.policy = {};
             request.policy.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.updateAutoscalingPolicy = mockSimpleGrpcMethod(
                 request,
@@ -236,8 +233,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest = {};
             request.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.getAutoscalingPolicy = mockSimpleGrpcMethod(
                 request,
@@ -288,8 +283,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest = {};
             request.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.deleteAutoscalingPolicy = mockSimpleGrpcMethod(
                 request,

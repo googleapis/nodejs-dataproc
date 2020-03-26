@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, PaginationResponse} from 'google-gax';
+import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback} from 'google-gax';
 import * as path from 'path';
 
 import { Transform } from 'stream';
@@ -165,6 +165,7 @@ export class ClusterControllerClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback?
+      /* eslint-disable @typescript-eslint/no-var-requires */
       this._gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
       this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
@@ -241,7 +242,7 @@ export class ClusterControllerClient {
     this.clusterControllerStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1beta2.ClusterController') :
-          // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.dataproc.v1beta2.ClusterController,
         this._opts) as Promise<{[method: string]: Function}>;
 
@@ -760,7 +761,7 @@ export class ClusterControllerClient {
   listClusters(
       request: protosTypes.google.cloud.dataproc.v1beta2.IListClustersRequest,
       options: gax.CallOptions,
-      callback: Callback<
+      callback: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.ICluster[],
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersResponse>): void;
@@ -818,11 +819,11 @@ export class ClusterControllerClient {
  */
   listClusters(
       request: protosTypes.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+      optionsOrCallback?: gax.CallOptions|PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.ICluster[],
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersResponse>,
-      callback?: Callback<
+      callback?: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.ICluster[],
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListClustersResponse>):

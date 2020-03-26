@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, PaginationResponse} from 'google-gax';
+import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback} from 'google-gax';
 import * as path from 'path';
 
 import { Transform } from 'stream';
@@ -192,7 +192,7 @@ export class JobControllerClient {
     this.jobControllerStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.JobController') :
-          // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.dataproc.v1.JobController,
         this._opts) as Promise<{[method: string]: Function}>;
 
@@ -613,7 +613,7 @@ export class JobControllerClient {
   listJobs(
       request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
       options: gax.CallOptions,
-      callback: Callback<
+      callback: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1.IJob[],
           protosTypes.google.cloud.dataproc.v1.IListJobsRequest|null,
           protosTypes.google.cloud.dataproc.v1.IListJobsResponse>): void;
@@ -675,11 +675,11 @@ export class JobControllerClient {
  */
   listJobs(
       request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+      optionsOrCallback?: gax.CallOptions|PaginationCallback<
           protosTypes.google.cloud.dataproc.v1.IJob[],
           protosTypes.google.cloud.dataproc.v1.IListJobsRequest|null,
           protosTypes.google.cloud.dataproc.v1.IListJobsResponse>,
-      callback?: Callback<
+      callback?: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1.IJob[],
           protosTypes.google.cloud.dataproc.v1.IListJobsRequest|null,
           protosTypes.google.cloud.dataproc.v1.IListJobsResponse>):

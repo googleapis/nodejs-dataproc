@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, PaginationResponse} from 'google-gax';
+import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback} from 'google-gax';
 import * as path from 'path';
 
 import { Transform } from 'stream';
@@ -193,7 +193,7 @@ export class AutoscalingPolicyServiceClient {
     this.autoscalingPolicyServiceStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1beta2.AutoscalingPolicyService') :
-          // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.dataproc.v1beta2.AutoscalingPolicyService,
         this._opts) as Promise<{[method: string]: Function}>;
 
@@ -571,7 +571,7 @@ export class AutoscalingPolicyServiceClient {
   listAutoscalingPolicies(
       request: protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
       options: gax.CallOptions,
-      callback: Callback<
+      callback: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.IAutoscalingPolicy[],
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesResponse>): void;
@@ -617,11 +617,11 @@ export class AutoscalingPolicyServiceClient {
  */
   listAutoscalingPolicies(
       request: protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+      optionsOrCallback?: gax.CallOptions|PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.IAutoscalingPolicy[],
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesResponse>,
-      callback?: Callback<
+      callback?: PaginationCallback<
           protosTypes.google.cloud.dataproc.v1beta2.IAutoscalingPolicy[],
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest|null,
           protosTypes.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesResponse>):

@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const workflowtemplateserviceModule = require('../src');
 
 
@@ -148,8 +149,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1beta2.ICreateWorkflowTemplateRequest = {};
             request.parent = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.createWorkflowTemplate = mockSimpleGrpcMethod(
                 request,
@@ -200,8 +199,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1beta2.IGetWorkflowTemplateRequest = {};
             request.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.getWorkflowTemplate = mockSimpleGrpcMethod(
                 request,
@@ -254,8 +251,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             const request: protosTypes.google.cloud.dataproc.v1beta2.IUpdateWorkflowTemplateRequest = {};
             request.template = {};
             request.template.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.updateWorkflowTemplate = mockSimpleGrpcMethod(
                 request,
@@ -306,8 +301,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1beta2.IDeleteWorkflowTemplateRequest = {};
             request.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.deleteWorkflowTemplate = mockSimpleGrpcMethod(
                 request,
@@ -361,8 +354,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1beta2.IInstantiateWorkflowTemplateRequest = {};
             request.name = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.instantiateWorkflowTemplate = mockLongRunningGrpcMethod(
                 request,
@@ -420,8 +411,6 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1beta2.IInstantiateInlineWorkflowTemplateRequest = {};
             request.parent = '';
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.instantiateInlineWorkflowTemplate = mockLongRunningGrpcMethod(
                 request,

@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const clustercontrollerModule = require('../src');
 
 
@@ -146,8 +147,6 @@ describe('v1.ClusterControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetClusterRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.getCluster = mockSimpleGrpcMethod(
                 request,
@@ -199,8 +198,6 @@ describe('v1.ClusterControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateClusterRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.createCluster = mockLongRunningGrpcMethod(
                 request,
@@ -256,8 +253,6 @@ describe('v1.ClusterControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateClusterRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.updateCluster = mockLongRunningGrpcMethod(
                 request,
@@ -313,8 +308,6 @@ describe('v1.ClusterControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteClusterRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(
                 request,
@@ -370,8 +363,6 @@ describe('v1.ClusterControllerClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDiagnoseClusterRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(
                 request,
