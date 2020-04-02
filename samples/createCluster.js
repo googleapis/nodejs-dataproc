@@ -13,8 +13,6 @@
 // limitations under the License.
 
 // Code for creating a Cloud Dataproc cluster with the Node.js Client Library.
-// This sample can be run either by following the usage below or by following
-// the developer TODO below.
 
 // sample-metadata:
 //   title: Create Cluster
