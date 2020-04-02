@@ -19,6 +19,8 @@
 //   title: Instantiate an inline workflow template
 //   usage: node instantiateInlineWorkflowTemplate.js <PROJECT_ID> <REGION>
 
+/*eslint no-warning-comments: [0, { "terms": ["todo", "fixme"], "location": "anywhere" }]*/
+
 function main(projectId = 'YOUR_PROJECT_ID', region = 'YOUR_REGION') {
   // [START dataproc_instantiate_inline_workflow_template]
   const dataproc = require('@google-cloud/dataproc');
