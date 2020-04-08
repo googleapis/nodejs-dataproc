@@ -25,7 +25,7 @@ import * as jobcontrollerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LROperation} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
     const filledObject = (instance.constructor as typeof protobuf.Message)
@@ -39,6 +39,22 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -219,7 +235,7 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.submitJob = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.submitJob(request); }, expectedError);
+            await assert.rejects(async () => { await client.submitJob(request); }, expectedError);
             assert((client.innerApiCalls.submitJob as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -279,7 +295,7 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.getJob(request); }, expectedError);
+            await assert.rejects(async () => { await client.getJob(request); }, expectedError);
             assert((client.innerApiCalls.getJob as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -339,7 +355,7 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.updateJob(request); }, expectedError);
+            await assert.rejects(async () => { await client.updateJob(request); }, expectedError);
             assert((client.innerApiCalls.updateJob as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -399,7 +415,7 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.cancelJob(request); }, expectedError);
+            await assert.rejects(async () => { await client.cancelJob(request); }, expectedError);
             assert((client.innerApiCalls.cancelJob as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -459,8 +475,88 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.deleteJob(request); }, expectedError);
+            await assert.rejects(async () => { await client.deleteJob(request); }, expectedError);
             assert((client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+
+    describe('submitJobAsOperation', () => {
+        it('invokes submitJobAsOperation without error', async () => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.SubmitJobRequest());
+            const expectedOptions = {};
+            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
+            client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.submitJobAsOperation(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.submitJobAsOperation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes submitJobAsOperation without error using callback', async () => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.SubmitJobRequest());
+            const expectedOptions = {};
+            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
+            client.innerApiCalls.submitJobAsOperation = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.submitJobAsOperation(
+                    request,
+                    (err?: Error|null, 
+                     result?: LROperation<protos.google.cloud.dataproc.v1beta2.IJob, protos.google.cloud.dataproc.v1beta2.IJobMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataproc.v1beta2.IJob, protos.google.cloud.dataproc.v1beta2.IJobMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.submitJobAsOperation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
+
+        it('invokes submitJobAsOperation with call error', async () => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.SubmitJobRequest());
+            const expectedOptions = {};
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.submitJobAsOperation(request); }, expectedError);
+            assert((client.innerApiCalls.submitJobAsOperation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes submitJobAsOperation with LRO error', async () => {
+            const client = new jobcontrollerModule.v1beta2.JobControllerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.SubmitJobRequest());
+            const expectedOptions = {};
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.submitJobAsOperation(request);
+            await assert.rejects(async () => { await operation.promise(); }, expectedError);
+            assert((client.innerApiCalls.submitJobAsOperation as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
     });
@@ -527,7 +623,7 @@ describe('v1beta2.JobControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.listJobs(request); }, expectedError);
+            await assert.rejects(async () => { await client.listJobs(request); }, expectedError);
             assert((client.innerApiCalls.listJobs as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -586,7 +682,7 @@ describe('v1beta2.JobControllerClient', () => {
                     reject(err);
                 });
             });
-            assert.rejects(async () => { await promise; }, expectedError);
+            await assert.rejects(async () => { await promise; }, expectedError);
             assert((client.descriptors.page.listJobs.createStream as SinonStub)
                 .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
         });
@@ -623,7 +719,7 @@ describe('v1beta2.JobControllerClient', () => {
             const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.ListJobsRequest());const expectedError = new Error('expected');
             client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listJobsAsync(request);
-            assert.rejects(async () => {
+            await assert.rejects(async () => {
                 const responses: protos.google.cloud.dataproc.v1beta2.IJob[] = [];
                 for await (const resource of iterable) {
                     responses.push(resource!);
