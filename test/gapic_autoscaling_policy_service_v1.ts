@@ -243,7 +243,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             };
             const expectedError = new Error('expected');
             client.innerApiCalls.createAutoscalingPolicy = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.createAutoscalingPolicy(request); }, expectedError);
+            await assert.rejects(async () => { await client.createAutoscalingPolicy(request); }, expectedError);
             assert((client.innerApiCalls.createAutoscalingPolicy as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -330,7 +330,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             };
             const expectedError = new Error('expected');
             client.innerApiCalls.updateAutoscalingPolicy = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.updateAutoscalingPolicy(request); }, expectedError);
+            await assert.rejects(async () => { await client.updateAutoscalingPolicy(request); }, expectedError);
             assert((client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -414,7 +414,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             };
             const expectedError = new Error('expected');
             client.innerApiCalls.getAutoscalingPolicy = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.getAutoscalingPolicy(request); }, expectedError);
+            await assert.rejects(async () => { await client.getAutoscalingPolicy(request); }, expectedError);
             assert((client.innerApiCalls.getAutoscalingPolicy as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -498,7 +498,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             };
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteAutoscalingPolicy = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.deleteAutoscalingPolicy(request); }, expectedError);
+            await assert.rejects(async () => { await client.deleteAutoscalingPolicy(request); }, expectedError);
             assert((client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -590,7 +590,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             };
             const expectedError = new Error('expected');
             client.innerApiCalls.listAutoscalingPolicies = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.listAutoscalingPolicies(request); }, expectedError);
+            await assert.rejects(async () => { await client.listAutoscalingPolicies(request); }, expectedError);
             assert((client.innerApiCalls.listAutoscalingPolicies as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -658,7 +658,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                     reject(err);
                 });
             });
-            assert.rejects(async () => { await promise; }, expectedError);
+            await assert.rejects(async () => { await promise; }, expectedError);
             assert((client.descriptors.page.listAutoscalingPolicies.createStream as SinonStub)
                 .getCall(0).calledWith(client.innerApiCalls.listAutoscalingPolicies, request));
             assert.strictEqual(
@@ -709,7 +709,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             const expectedHeaderRequestParams = "parent=";const expectedError = new Error('expected');
             client.descriptors.page.listAutoscalingPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listAutoscalingPoliciesAsync(request);
-            assert.rejects(async () => {
+            await assert.rejects(async () => {
                 const responses: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] = [];
                 for await (const resource of iterable) {
                     responses.push(resource!);

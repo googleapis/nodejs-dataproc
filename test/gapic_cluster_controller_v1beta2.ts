@@ -235,7 +235,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.getCluster = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.getCluster(request); }, expectedError);
+            await assert.rejects(async () => { await client.getCluster(request); }, expectedError);
             assert((client.innerApiCalls.getCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -299,7 +299,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.createCluster = stubLongRunningCall(undefined, expectedError);
-            assert.rejects(async () => { await client.createCluster(request); }, expectedError);
+            await assert.rejects(async () => { await client.createCluster(request); }, expectedError);
             assert((client.innerApiCalls.createCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -315,7 +315,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.createCluster = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createCluster(request);
-            assert.rejects(async () => { await operation.promise(); }, expectedError);
+            await assert.rejects(async () => { await operation.promise(); }, expectedError);
             assert((client.innerApiCalls.createCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -379,7 +379,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, expectedError);
-            assert.rejects(async () => { await client.updateCluster(request); }, expectedError);
+            await assert.rejects(async () => { await client.updateCluster(request); }, expectedError);
             assert((client.innerApiCalls.updateCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -395,7 +395,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateCluster(request);
-            assert.rejects(async () => { await operation.promise(); }, expectedError);
+            await assert.rejects(async () => { await operation.promise(); }, expectedError);
             assert((client.innerApiCalls.updateCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -459,7 +459,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, expectedError);
-            assert.rejects(async () => { await client.deleteCluster(request); }, expectedError);
+            await assert.rejects(async () => { await client.deleteCluster(request); }, expectedError);
             assert((client.innerApiCalls.deleteCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -475,7 +475,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteCluster(request);
-            assert.rejects(async () => { await operation.promise(); }, expectedError);
+            await assert.rejects(async () => { await operation.promise(); }, expectedError);
             assert((client.innerApiCalls.deleteCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -539,7 +539,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.diagnoseCluster = stubLongRunningCall(undefined, expectedError);
-            assert.rejects(async () => { await client.diagnoseCluster(request); }, expectedError);
+            await assert.rejects(async () => { await client.diagnoseCluster(request); }, expectedError);
             assert((client.innerApiCalls.diagnoseCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -555,7 +555,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.diagnoseCluster = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.diagnoseCluster(request);
-            assert.rejects(async () => { await operation.promise(); }, expectedError);
+            await assert.rejects(async () => { await operation.promise(); }, expectedError);
             assert((client.innerApiCalls.diagnoseCluster as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -623,7 +623,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const expectedOptions = {};
             const expectedError = new Error('expected');
             client.innerApiCalls.listClusters = stubSimpleCall(undefined, expectedError);
-            assert.rejects(async () => { await client.listClusters(request); }, expectedError);
+            await assert.rejects(async () => { await client.listClusters(request); }, expectedError);
             assert((client.innerApiCalls.listClusters as SinonStub)
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
@@ -682,7 +682,7 @@ describe('v1beta2.ClusterControllerClient', () => {
                     reject(err);
                 });
             });
-            assert.rejects(async () => { await promise; }, expectedError);
+            await assert.rejects(async () => { await promise; }, expectedError);
             assert((client.descriptors.page.listClusters.createStream as SinonStub)
                 .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
         });
@@ -719,7 +719,7 @@ describe('v1beta2.ClusterControllerClient', () => {
             const request = generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.ListClustersRequest());const expectedError = new Error('expected');
             client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listClustersAsync(request);
-            assert.rejects(async () => {
+            await assert.rejects(async () => {
                 const responses: protos.google.cloud.dataproc.v1beta2.ICluster[] = [];
                 for await (const resource of iterable) {
                     responses.push(resource!);
