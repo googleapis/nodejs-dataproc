@@ -28,6 +28,7 @@ function main(projectId, region, clusterName, jobFilePath) {
   const dataproc = require('@google-cloud/dataproc');
   const {Storage} = require('@google-cloud/storage');
 
+  // eslint-disable-next-line node/no-missing-require
   const sleep = require('sleep');
 
   // Create a cluster client with the endpoint set to the desired cluster region
