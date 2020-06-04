@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.0.0...v2.0.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v5 ([#380](https://www.github.com/googleapis/nodejs-dataproc/issues/380)) ([6f5a2a4](https://www.github.com/googleapis/nodejs-dataproc/commit/6f5a2a4de59410837f7bfeec525d7492dda01dd7))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.6.0...v2.0.0) (2020-05-09)
 
 
