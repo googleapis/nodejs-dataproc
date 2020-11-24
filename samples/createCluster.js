@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Code for creating a Cloud Dataproc cluster with the Node.js Client Library.
+// Create a Dataproc cluster with the Node.js Client Library.
 
 // sample-metadata:
 //   title: Create Cluster
