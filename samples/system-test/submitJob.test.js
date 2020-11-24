@@ -14,60 +14,60 @@
 
 'use strict';
 
-const { assert } = require('chai');
-const { describe, it, after } = require('mocha');
+const {assert} = require('chai');
+const {describe, it, after} = require('mocha');
 const cp = require('child_process');
-const { v4 } = require('uuid');
+const {v4} = require('uuid');
 
 const projectId = process.env.GCLOUD_PROJECT;
 const region = 'us-central1';
 const clusterName = `node-sj-test-${v4()}`;
 const cluster = {
-    projectId: projectId,
-    region: region,
-    cluster: {
-        clusterName: clusterName,
-        config: {
-            masterConfig: {
-                numInstances: 1,
-                machineTypeUri: 'n1-standard-1',
-            },
-            workerConfig: {
-                numInstances: 2,
-                machineTypeUri: 'n1-standard-1',
-            },
-        },
+  projectId: projectId,
+  region: region,
+  cluster: {
+    clusterName: clusterName,
+    config: {
+      masterConfig: {
+        numInstances: 1,
+        machineTypeUri: 'n1-standard-1',
+      },
+      workerConfig: {
+        numInstances: 2,
+        machineTypeUri: 'n1-standard-1',
+      },
     },
+  },
 };
 
 const dataproc = require('@google-cloud/dataproc');
 const clusterClient = new dataproc.v1.ClusterControllerClient({
-    apiEndpoint: `${region}-dataproc.googleapis.com`,
+  apiEndpoint: `${region}-dataproc.googleapis.com`,
 });
 
 const execSync = cmd =>
-    cp.execSync(cmd, {
-        encoding: 'utf-8',
-    });
+  cp.execSync(cmd, {
+    encoding: 'utf-8',
+  });
 
 describe('submit a Spark job to a Dataproc cluster', () => {
-    before(async () => {
-        const [operation] = await clusterClient.createCluster(cluster)
-        await operation.promise();
-    })
+  before(async () => {
+    const [operation] = await clusterClient.createCluster(cluster);
+    await operation.promise();
+  });
 
-    it('should submit a job to a dataproc cluster', async () => {
-        const stdout = execSync(
-            `node submitJob.js "${projectId}" "${region}" "${clusterName}"`
-        );
-        assert.match(stdout, new RegExp("Job finished successfully"));
-    });
+  it('should submit a job to a dataproc cluster', async () => {
+    const stdout = execSync(
+      `node submitJob.js "${projectId}" "${region}" "${clusterName}"`
+    );
+    assert.match(stdout, new RegExp('Job finished successfully'));
+  });
 
-    after(async () => {
-        await clusterClient.deleteCluster({
-            projectId: projectId,
-            region: region,
-            clusterName: clusterName,
-        });
+  after(async () => {
+    await clusterClient.deleteCluster({
+      projectId: projectId,
+      region: region,
+      clusterName: clusterName,
     });
+  });
 });

@@ -26,7 +26,7 @@
 
 function main(projectId, region, clusterName, jobFilePath) {
   const dataproc = require('@google-cloud/dataproc');
-  const { Storage } = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Create a cluster client with the endpoint set to the desired cluster region
   const clusterClient = new dataproc.v1.ClusterControllerClient({
@@ -83,7 +83,9 @@ function main(projectId, region, clusterName, jobFilePath) {
     let [jobOperation] = await jobClient.submitJobAsOperation(job);
     const [jobResponse] = await jobOperation.promise();
 
-    const matches = jobResponse.driverOutputResourceUri.match("gs://(.*?)/(.*)");
+    const matches = jobResponse.driverOutputResourceUri.match(
+      'gs://(.*?)/(.*)'
+    );
 
     const storage = new Storage();
 
@@ -102,7 +104,9 @@ function main(projectId, region, clusterName, jobFilePath) {
       clusterName: clusterName,
     };
 
-    const [deleteOperation] = await clusterClient.deleteCluster(deleteClusterReq);
+    const [deleteOperation] = await clusterClient.deleteCluster(
+      deleteClusterReq
+    );
     await deleteOperation.promise();
 
     // Output a success message
@@ -117,7 +121,7 @@ const args = process.argv.slice(2);
 if (args.length !== 4) {
   console.log(
     'Insufficient number of parameters provided. Please make sure a ' +
-    'PROJECT_ID, REGION, CLUSTER_NAME and JOB_FILE_PATH are provided, in this order.'
+      'PROJECT_ID, REGION, CLUSTER_NAME and JOB_FILE_PATH are provided, in this order.'
   );
 }
 
