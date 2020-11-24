@@ -80,7 +80,7 @@ function main(projectId, region, clusterName, jobFilePath) {
       },
     };
 
-    let [jobOperation] = await jobClient.submitJobAsOperation(job);
+    const [jobOperation] = await jobClient.submitJobAsOperation(job);
     const [jobResponse] = await jobOperation.promise();
 
     const matches = jobResponse.driverOutputResourceUri.match(
