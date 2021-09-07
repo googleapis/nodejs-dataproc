@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta2 from './v1beta2';
 
 const AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
 type AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
@@ -29,6 +30,7 @@ type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
 export {
   v1,
+  v1beta2,
   AutoscalingPolicyServiceClient,
   ClusterControllerClient,
   JobControllerClient,
@@ -36,6 +38,7 @@ export {
 };
 export default {
   v1,
+  v1beta2,
   AutoscalingPolicyServiceClient,
   ClusterControllerClient,
   JobControllerClient,
