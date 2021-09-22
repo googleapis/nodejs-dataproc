@@ -425,6 +425,10 @@ export class JobControllerClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.submitJob(request);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.submit_job.js</caption>
+   * region_tag:dataproc_submit_job_sample
+   *
    */
   submitJob(
     request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
@@ -513,6 +517,10 @@ export class JobControllerClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getJob(request);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.get_job.js</caption>
+   * region_tag:dataproc_get_job_sample
+   *
    */
   getJob(
     request?: protos.google.cloud.dataproc.v1.IGetJobRequest,
@@ -610,6 +618,10 @@ export class JobControllerClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.updateJob(request);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.update_job.js</caption>
+   * region_tag:dataproc_update_job_sample
+   *
    */
   updateJob(
     request?: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
@@ -702,6 +714,10 @@ export class JobControllerClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelJob(request);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.cancel_job.js</caption>
+   * region_tag:dataproc_cancel_job_sample
+   *
    */
   cancelJob(
     request?: protos.google.cloud.dataproc.v1.ICancelJobRequest,
@@ -791,6 +807,10 @@ export class JobControllerClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.deleteJob(request);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.delete_job.js</caption>
+   * region_tag:dataproc_delete_job_sample
+   *
    */
   deleteJob(
     request?: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
@@ -905,6 +925,10 @@ export class JobControllerClient {
    * @example
    * const [operation] = await client.submitJobAsOperation(request);
    * const [response] = await operation.promise();
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
+   * region_tag:dataproc_submit_job_as_operation_sample
+   *
    */
   submitJobAsOperation(
     request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
@@ -968,6 +992,10 @@ export class JobControllerClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
+   * region_tag:dataproc_submit_job_as_operation_sample
+   *
    */
   async checkSubmitJobAsOperationProgress(
     name: string
@@ -1068,6 +1096,10 @@ export class JobControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
+   * region_tag:dataproc_list_jobs_sample
+   *
    */
   listJobs(
     request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
@@ -1157,6 +1189,10 @@ export class JobControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
+   * region_tag:dataproc_list_jobs_sample
+   *
    */
   listJobsStream(
     request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
@@ -1170,7 +1206,8 @@ export class JobControllerClient {
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as gax.GaxCall,
@@ -1233,6 +1270,10 @@ export class JobControllerClient {
    * for await (const response of iterable) {
    *   // process response
    * }
+   *
+   * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
+   * region_tag:dataproc_list_jobs_sample
+   *
    */
   listJobsAsync(
     request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
@@ -1247,7 +1288,8 @@ export class JobControllerClient {
         project_id: request.projectId || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
