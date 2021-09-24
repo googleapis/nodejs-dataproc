@@ -1711,7 +1711,8 @@ export class ClusterControllerClient {
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listClusters'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as gax.GaxCall,
@@ -1784,7 +1785,8 @@ export class ClusterControllerClient {
         project_id: request.projectId || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listClusters'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
