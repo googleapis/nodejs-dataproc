@@ -12,56 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 'use strict';
 
 function main(parent) {
-  // [START dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_async]
+  // [START dataproc_v1_generated_BatchController_ListBatches_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the region or location, as described
-   *  in https://cloud.google.com/apis/design/resource_names.
-   *  * For `projects.regions.workflowTemplates,list`, the resource
-   *    name of the region has the following format:
-   *    `projects/{project_id}/regions/{region}`
-   *  * For `projects.locations.workflowTemplates.list`, the
-   *    resource name of the location has the following format:
-   *    `projects/{project_id}/locations/{location}`
+   *  Required. The parent, which owns this collection of batches.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of results to return in each response.
+   *  Optional. The maximum number of batches to return in each response.
+   *  The service may return fewer than this value.
+   *  The default page size is 20; the maximum page size is 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. The page token, returned by a previous call, to request the
-   *  next page of results.
+   *  Optional. A page token received from a previous `ListBatches` call.
+   *  Provide this token to retrieve the subsequent page.
    */
   // const pageToken = 'abc123'
 
   // Imports the Dataproc library
-  const {WorkflowTemplateServiceClient} = require('@google-cloud/dataproc').v1;
+  const {BatchControllerClient} = require('@google-cloud/dataproc').v1;
 
   // Instantiates a client
-  const dataprocClient = new WorkflowTemplateServiceClient();
+  const dataprocClient = new BatchControllerClient();
 
-  async function listWorkflowTemplates() {
+  async function listBatches() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await dataprocClient.listWorkflowTemplatesAsync(request);
+    const iterable = await dataprocClient.listBatchesAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
-  listWorkflowTemplates();
-  // [END dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_async]
+  listBatches();
+  // [END dataproc_v1_generated_BatchController_ListBatches_async]
 }
 
 process.on('unhandledRejection', err => {

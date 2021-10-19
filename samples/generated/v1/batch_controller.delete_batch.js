@@ -12,16 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 'use strict';
 
 function main(name) {
-  // [START dataproc_v1_generated_BatchController_GetBatch_async]
+  // [START dataproc_v1_generated_BatchController_DeleteBatch_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the batch to retrieve.
+   *  Required. The name of the batch resource to delete.
    */
   // const name = 'abc123'
 
@@ -31,19 +30,19 @@ function main(name) {
   // Instantiates a client
   const dataprocClient = new BatchControllerClient();
 
-  async function getBatch() {
+  async function deleteBatch() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataprocClient.getBatch(request);
+    const response = await dataprocClient.deleteBatch(request);
     console.log(response);
   }
 
-  getBatch();
-  // [END dataproc_v1_generated_BatchController_GetBatch_async]
+  deleteBatch();
+  // [END dataproc_v1_generated_BatchController_DeleteBatch_async]
 }
 
 process.on('unhandledRejection', err => {
