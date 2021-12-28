@@ -13,5 +13,5 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559745",
   "codeowner_team": "@googleapis/api-dataproc",
   "api_shortname": "dataproc",
-  "library_type": ""
+  "library_type": "GAPIC_AUTO"
 }
