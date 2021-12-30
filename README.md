@@ -6,7 +6,6 @@
 
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/dataproc.svg)](https://www.npmjs.org/package/@google-cloud/dataproc)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dataproc/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dataproc)
 
 
 
