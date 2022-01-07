@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -553,7 +553,8 @@ export class BatchControllerClient {
    *   Optional. The ID to use for the batch, which will become the final component of
    *   the batch's resource name.
    *
-   *   This value must be 4-63 characters. Valid characters are `/{@link 0-9|a-z}-/`.
+   *   This value must be 4-63 characters. Valid characters
+   *   are /{@link 0-9|a-z}-/.
    * @param {string} [request.requestId]
    *   Optional. A unique ID used to identify the request. If the service
    *   receives two
