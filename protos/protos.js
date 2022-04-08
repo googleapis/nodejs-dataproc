@@ -11151,7 +11151,6 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface IVirtualClusterConfig
                          * @property {string|null} [stagingBucket] VirtualClusterConfig stagingBucket
-                         * @property {string|null} [tempBucket] VirtualClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1.IKubernetesClusterConfig|null} [kubernetesClusterConfig] VirtualClusterConfig kubernetesClusterConfig
                          * @property {google.cloud.dataproc.v1.IAuxiliaryServicesConfig|null} [auxiliaryServicesConfig] VirtualClusterConfig auxiliaryServicesConfig
                          */
@@ -11178,14 +11177,6 @@
                          * @instance
                          */
                         VirtualClusterConfig.prototype.stagingBucket = "";
-    
-                        /**
-                         * VirtualClusterConfig tempBucket.
-                         * @member {string} tempBucket
-                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
-                         * @instance
-                         */
-                        VirtualClusterConfig.prototype.tempBucket = "";
     
                         /**
                          * VirtualClusterConfig kubernetesClusterConfig.
@@ -11243,8 +11234,6 @@
                                 writer = $Writer.create();
                             if (message.stagingBucket != null && Object.hasOwnProperty.call(message, "stagingBucket"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.stagingBucket);
-                            if (message.tempBucket != null && Object.hasOwnProperty.call(message, "tempBucket"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tempBucket);
                             if (message.kubernetesClusterConfig != null && Object.hasOwnProperty.call(message, "kubernetesClusterConfig"))
                                 $root.google.cloud.dataproc.v1.KubernetesClusterConfig.encode(message.kubernetesClusterConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.auxiliaryServicesConfig != null && Object.hasOwnProperty.call(message, "auxiliaryServicesConfig"))
@@ -11285,9 +11274,6 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.stagingBucket = reader.string();
-                                    break;
-                                case 2:
-                                    message.tempBucket = reader.string();
                                     break;
                                 case 6:
                                     message.kubernetesClusterConfig = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.decode(reader, reader.uint32());
@@ -11334,9 +11320,6 @@
                             if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
                                 if (!$util.isString(message.stagingBucket))
                                     return "stagingBucket: string expected";
-                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
-                                if (!$util.isString(message.tempBucket))
-                                    return "tempBucket: string expected";
                             if (message.kubernetesClusterConfig != null && message.hasOwnProperty("kubernetesClusterConfig")) {
                                 properties.infrastructureConfig = 1;
                                 {
@@ -11367,8 +11350,6 @@
                             var message = new $root.google.cloud.dataproc.v1.VirtualClusterConfig();
                             if (object.stagingBucket != null)
                                 message.stagingBucket = String(object.stagingBucket);
-                            if (object.tempBucket != null)
-                                message.tempBucket = String(object.tempBucket);
                             if (object.kubernetesClusterConfig != null) {
                                 if (typeof object.kubernetesClusterConfig !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.VirtualClusterConfig.kubernetesClusterConfig: object expected");
@@ -11397,13 +11378,10 @@
                             var object = {};
                             if (options.defaults) {
                                 object.stagingBucket = "";
-                                object.tempBucket = "";
                                 object.auxiliaryServicesConfig = null;
                             }
                             if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
                                 object.stagingBucket = message.stagingBucket;
-                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
-                                object.tempBucket = message.tempBucket;
                             if (message.kubernetesClusterConfig != null && message.hasOwnProperty("kubernetesClusterConfig")) {
                                 object.kubernetesClusterConfig = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.toObject(message.kubernetesClusterConfig, options);
                                 if (options.oneofs)

@@ -1670,13 +1670,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "tempBucket": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "kubernetesClusterConfig": {
                           "type": "KubernetesClusterConfig",
                           "id": 6,

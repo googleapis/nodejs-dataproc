@@ -4459,9 +4459,6 @@ export namespace google {
                     /** VirtualClusterConfig stagingBucket */
                     stagingBucket?: (string|null);
 
-                    /** VirtualClusterConfig tempBucket */
-                    tempBucket?: (string|null);
-
                     /** VirtualClusterConfig kubernetesClusterConfig */
                     kubernetesClusterConfig?: (google.cloud.dataproc.v1.IKubernetesClusterConfig|null);
 
@@ -4480,9 +4477,6 @@ export namespace google {
 
                     /** VirtualClusterConfig stagingBucket. */
                     public stagingBucket: string;
-
-                    /** VirtualClusterConfig tempBucket. */
-                    public tempBucket: string;
 
                     /** VirtualClusterConfig kubernetesClusterConfig. */
                     public kubernetesClusterConfig?: (google.cloud.dataproc.v1.IKubernetesClusterConfig|null);
