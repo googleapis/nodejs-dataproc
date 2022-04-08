@@ -676,6 +676,20 @@
                          */
                         BasicAutoscalingAlgorithm.prototype.cooldownPeriod = null;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BasicAutoscalingAlgorithm config.
+                         * @member {"yarnConfig"|undefined} config
+                         * @memberof google.cloud.dataproc.v1.BasicAutoscalingAlgorithm
+                         * @instance
+                         */
+                        Object.defineProperty(BasicAutoscalingAlgorithm.prototype, "config", {
+                            get: $util.oneOfGetter($oneOfFields = ["yarnConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new BasicAutoscalingAlgorithm instance using the specified properties.
                          * @function create
@@ -779,10 +793,14 @@
                         BasicAutoscalingAlgorithm.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.yarnConfig != null && message.hasOwnProperty("yarnConfig")) {
-                                var error = $root.google.cloud.dataproc.v1.BasicYarnAutoscalingConfig.verify(message.yarnConfig);
-                                if (error)
-                                    return "yarnConfig." + error;
+                                properties.config = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.BasicYarnAutoscalingConfig.verify(message.yarnConfig);
+                                    if (error)
+                                        return "yarnConfig." + error;
+                                }
                             }
                             if (message.cooldownPeriod != null && message.hasOwnProperty("cooldownPeriod")) {
                                 var error = $root.google.protobuf.Duration.verify(message.cooldownPeriod);
@@ -830,12 +848,13 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.yarnConfig = null;
+                            if (options.defaults)
                                 object.cooldownPeriod = null;
-                            }
-                            if (message.yarnConfig != null && message.hasOwnProperty("yarnConfig"))
+                            if (message.yarnConfig != null && message.hasOwnProperty("yarnConfig")) {
                                 object.yarnConfig = $root.google.cloud.dataproc.v1.BasicYarnAutoscalingConfig.toObject(message.yarnConfig, options);
+                                if (options.oneofs)
+                                    object.config = "yarnConfig";
+                            }
                             if (message.cooldownPeriod != null && message.hasOwnProperty("cooldownPeriod"))
                                 object.cooldownPeriod = $root.google.protobuf.Duration.toObject(message.cooldownPeriod, options);
                             return object;

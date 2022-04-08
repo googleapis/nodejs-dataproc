@@ -303,6 +303,9 @@ export namespace google {
                     /** BasicAutoscalingAlgorithm cooldownPeriod. */
                     public cooldownPeriod?: (google.protobuf.IDuration|null);
 
+                    /** BasicAutoscalingAlgorithm config. */
+                    public config?: "yarnConfig";
+
                     /**
                      * Creates a new BasicAutoscalingAlgorithm instance using the specified properties.
                      * @param [properties] Properties to set

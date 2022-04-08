@@ -198,6 +198,13 @@
                       }
                     },
                     "BasicAutoscalingAlgorithm": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "yarnConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "yarnConfig": {
                           "type": "BasicYarnAutoscalingConfig",
