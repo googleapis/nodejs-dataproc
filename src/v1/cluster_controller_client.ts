@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -478,7 +477,8 @@ export class ClusterControllerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -783,7 +783,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Cluster,
@@ -1008,7 +1008,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Cluster,
@@ -1168,7 +1168,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Cluster,
@@ -1328,7 +1328,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Cluster,
@@ -1490,7 +1490,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1640,7 +1640,7 @@ export class ClusterControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.diagnoseCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.DiagnoseClusterResults,
@@ -1826,7 +1826,7 @@ export class ClusterControllerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listClusters.createStream(
-      this.innerApiCalls.listClusters as gax.GaxCall,
+      this.innerApiCalls.listClusters as GaxCall,
       request,
       callSettings
     );
@@ -1898,7 +1898,7 @@ export class ClusterControllerClient {
     this.initialize();
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.ICluster>;
   }

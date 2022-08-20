@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -421,7 +420,8 @@ export class BatchControllerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -803,7 +803,7 @@ export class BatchControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBatch,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Batch,
@@ -947,7 +947,7 @@ export class BatchControllerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBatches.createStream(
-      this.innerApiCalls.listBatches as gax.GaxCall,
+      this.innerApiCalls.listBatches as GaxCall,
       request,
       callSettings
     );
@@ -998,7 +998,7 @@ export class BatchControllerClient {
     this.initialize();
     return this.descriptors.page.listBatches.asyncIterate(
       this.innerApiCalls['listBatches'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.IBatch>;
   }

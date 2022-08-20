@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -418,7 +417,8 @@ export class JobControllerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1106,7 +1106,7 @@ export class JobControllerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.submitJobAsOperation,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataproc.v1.Job,
@@ -1298,7 +1298,7 @@ export class JobControllerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
-      this.innerApiCalls.listJobs as gax.GaxCall,
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
@@ -1374,7 +1374,7 @@ export class JobControllerClient {
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.IJob>;
   }

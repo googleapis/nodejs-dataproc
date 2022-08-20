@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -447,7 +446,8 @@ export class WorkflowTemplateServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1130,7 +1130,7 @@ export class WorkflowTemplateServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.instantiateWorkflowTemplate,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1315,7 +1315,7 @@ export class WorkflowTemplateServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.instantiateInlineWorkflowTemplate,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1479,7 +1479,7 @@ export class WorkflowTemplateServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkflowTemplates.createStream(
-      this.innerApiCalls.listWorkflowTemplates as gax.GaxCall,
+      this.innerApiCalls.listWorkflowTemplates as GaxCall,
       request,
       callSettings
     );
@@ -1537,7 +1537,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize();
     return this.descriptors.page.listWorkflowTemplates.asyncIterate(
       this.innerApiCalls['listWorkflowTemplates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.IWorkflowTemplate>;
   }
